@@ -102,7 +102,7 @@ jar {
 
 task importJacocoTestReportOnTeamCity << {
     logger.quiet("Notificando TeamCity para importar informações do JaCoCo")
-    logger.quiet("##teamcity[jacocoReport dataPath='build/jacoco/test.exec' includes='br.com.catelani.santander.filetransfer.*' classpath='+:build/classes/main/**/*.class' reportDir='build/jacoco-teamcity-report']")
+    logger.quiet("##teamcity[jacocoReport dataPath='build/jacoco/test.exec' includes='br.com.catelani.santander.filetransfer.*' classpath='+:build/classes/main/**/*.class']")
 }
 
 importJacocoTestReportOnTeamCity.onlyIf { System.hasProperty('TEAMCITY_CI') || System.getenv('TEAMCITY_CI') }
