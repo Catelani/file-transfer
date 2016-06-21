@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Ignorando algumas regras que não se aplicam a classes-->
+<FindBugsFilter>
+    <!-- Reclamações por conta dos campos com tipos fixos (Número de Sequencia, TipoRegistro) -->
+    <Match>
+        <Class name="br.com.catelani.santander.filetransfer.domain.CabecalhoPropostaAcordo" />
+        <Bug code="SS,RCN"/>
+    </Match>
+    <Match>
+        <Class name="br.com.catelani.santander.filetransfer.domain.DetalhePropostaAcordo$DetalhesCompartilhados" />
+        <Bug code="SS,RCN"/>
+    </Match>
+</FindBugsFilter>

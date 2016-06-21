@@ -1,0 +1,101 @@
+buildscript {
+    repositories { jcenter() }
+    dependencies {
+        classpath 'com.netflix.nebula:nebula-publishing-plugin:4.7.0'
+    }
+}
+
+plugins {
+    id 'nebula.dependency-recommender' version '3.3.0'
+    id 'nebula.dependency-lock' version '4.3.0'
+    id 'nebula.nebula-release' version '4.0.1'
+    id 'nebula.provided-base' version '3.1.0'
+}
+
+apply plugin: 'java'
+apply plugin: 'nebula.source-jar'
+apply plugin: 'nebula.javadoc-jar'
+
+// QA plugins
+apply plugin: 'pmd'
+apply plugin: 'findbugs'
+apply plugin: 'build-dashboard'
+apply plugin: 'jacoco'
+
+group 'br.com.catelani.santander'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.slf4j:slf4j-api'
+    compile group: 'ch.qos.logback', name: 'logback-classic'
+    compile group: 'com.univocity', name: 'univocity-parsers'
+    compile 'org.jetbrains:annotations'
+
+    compile 'com.google.inject:guice'
+
+    // lombok
+    provided group: 'org.projectlombok', name: 'lombok'
+
+    // tests
+    testCompile group: 'junit', name: 'junit'
+    testCompile group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.12'
+}
+
+def recomendationsFile = rootProject.file('dependencies-version.properties')
+
+dependencyRecommendations {
+    propertiesFile file: recomendationsFile
+}
+
+pmd {
+    toolVersion = '5.4.2'
+}
+
+findbugs {
+    excludeFilter = file("$projectDir/config/findbugs/ignore.xml")
+}
+
+// qa plugin configuration to export html instead of xml
+tasks.withType(FindBugs) {
+    reports {
+        html.enabled = true
+        xml.enabled = false
+    }
+}
+
+tasks.withType(Pmd) {
+    reports {
+        html.enabled = true
+        xml.enabled = false
+    }
+}
+
+jacoco {
+    toolVersion ='0.7.7.201606060606'
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+    }
+}
+
+jar {
+    manifest {
+        attributes('Implementation-Title': project.name,
+                'Implementation-Version': project.version,
+                'Implementation-Author': 'Catelani')
+    }
+}
