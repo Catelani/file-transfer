@@ -32,6 +32,10 @@ public class ValidadorTipoPrestacaoServicoHandler extends ValidadorPropostaAcord
     log.debug("Validando tipo de Prestação de Serviço");
     final TipoPrestacaoServico tipoPrestacaoServico = propostaAcordo.getCabecalho().getDadosPrestador().getTipoPrestacaoServico();
 
-    return tipoPrestacaoServico == null ? ERRO_VALIDACAO : Optional.empty();
+    final Optional<ErroValidacao> resultadoValidacao = tipoPrestacaoServico == null ? ERRO_VALIDACAO : Optional.empty();
+
+    log.debug("Tipo de Prestação de Serviço {}", resultadoValidacao.isPresent() ? "válido" : "inválido");
+
+    return resultadoValidacao;
   }
 }

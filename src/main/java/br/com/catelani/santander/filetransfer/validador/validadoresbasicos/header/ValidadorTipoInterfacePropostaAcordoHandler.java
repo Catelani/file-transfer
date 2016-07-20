@@ -17,6 +17,7 @@ import java.util.List;
  * @author Kennedy Oliveira
  * @since 1.0.0
  */
+// TODO Ver melhor o que fazer com esse validador, pois pode ser qualquer uma das opções, de acordo com o Fluxo, envio / recebimento
 @Slf4j
 public class ValidadorTipoInterfacePropostaAcordoHandler extends ValidadorPropostaAcordoHandler {
 

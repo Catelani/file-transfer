@@ -10,7 +10,7 @@ import java.util.Optional;
 
 /**
  * <p>Valida se o número de lote foi preenchido corretamente.</p>
- * <p>Se houver falha, será adicionado um {@link CodigoRetornoErro#ERRO_PREENCHIMENTO_NUMERO_DO_LOTE} </p>
+ * <p>Se houver falha, será adicionado um {@link CodigoRetornoErro#ERRO_PREENCHIMENTO_NUMERO_DO_LOTE}.</p>
  *
  * @author Kennedy Oliveira
  * @since 1.0.0
@@ -24,8 +24,11 @@ public class ValidadorNumeroLoteHandler extends ValidadorPropostaAcordoHandler {
 
     final long numeroLote = propostaAcordo.getCabecalho().getDadosPrestador().getNumeroLote();
     if (numeroLote <= 0) {
+      log.debug("Número de lote [{}] inválido.", numeroLote);
       return Optional.of(new ErroValidacao(CodigoRetornoErro.getByCodigoErro("308"), "O Número de lote deve ser númerico e maior que 0, foi informado {" + numeroLote + "}"));
     }
+
+    log.debug("Numero do Lote [{}] valido", numeroLote);
 
     return super.isValid(propostaAcordo);
   }

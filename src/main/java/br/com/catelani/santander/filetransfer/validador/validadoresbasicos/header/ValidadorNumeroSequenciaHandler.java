@@ -19,14 +19,21 @@ import java.util.Optional;
 @Slf4j
 public class ValidadorNumeroSequenciaHandler extends ValidadorPropostaAcordoHandler {
 
+  private final static String numeroSequenciaCorreto = "00001";
+
   @Override
   protected Optional<ErroValidacao> isValid(PropostaAcordo propostaAcordo) {
     log.debug("Validando Número de Sequencia do Cabeçalho");
 
     final String numeroDeSequencia = propostaAcordo.getCabecalho().getNumeroDeSequencia();
-    if (!Objects.equals(numeroDeSequencia, "00001")) {
-      return Optional.of(new ErroValidacao(CodigoRetornoErro.getByCodigoErro("312"), "O Número de Sequencia do Cabeçalho é {" + numeroDeSequencia + "} e deveria ser {00001}."));
+    if (!Objects.equals(numeroDeSequencia, numeroSequenciaCorreto)) {
+      log.debug("Numero de Sequencia [{}] inválido para o cabeçalho, deveria ser {}", numeroDeSequencia, numeroSequenciaCorreto);
+
+      return Optional.of(new ErroValidacao(CodigoRetornoErro.getByCodigoErro("312"),
+                                           "O Número de Sequencia do Cabeçalho é {" + numeroDeSequencia + "} e deveria ser {" + numeroSequenciaCorreto + "}."));
     }
+
+    log.debug("Número de Sequencia do Cabeçalho [{}] valido.", numeroDeSequencia);
 
     return super.isValid(propostaAcordo);
   }

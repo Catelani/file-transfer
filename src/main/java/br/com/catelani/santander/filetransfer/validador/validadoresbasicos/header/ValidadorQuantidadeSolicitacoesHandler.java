@@ -18,8 +18,7 @@ import java.util.Optional;
 @Slf4j
 public class ValidadorQuantidadeSolicitacoesHandler extends ValidadorPropostaAcordoHandler {
 
-  private static final Optional<ErroValidacao> ERRO_VALIDACAO_QUANTIDADE_ZERADA = Optional.of(new ErroValidacao(CodigoRetornoErro.getByCodigoErro("311"),
-                                                                                                                "Deve haver mais que 0 solicitações!"));
+  private static final ErroValidacao ERRO_VALIDACAO_QUANTIDADE_ZERADA = new ErroValidacao(CodigoRetornoErro.getByCodigoErro("311"), "Deve haver pelo menos 1 solicitação!");
 
   @Override
   protected Optional<ErroValidacao> isValid(PropostaAcordo propostaAcordo) {
@@ -27,18 +26,22 @@ public class ValidadorQuantidadeSolicitacoesHandler extends ValidadorPropostaAco
     final long quantidadeSolicitacoes = propostaAcordo.getCabecalho().getDadosPrestador().getQuantidadeSolicitacoes();
 
     if (quantidadeSolicitacoes == 0) {
-      return ERRO_VALIDACAO_QUANTIDADE_ZERADA;
+      log.debug("Não há nenhuma solicitação de proposta de acordo, deve haver pelo menos 1.");
+      return Optional.of(ERRO_VALIDACAO_QUANTIDADE_ZERADA);
     }
 
     final int totalDetalhes = propostaAcordo.getDetalhes().size();
     if (quantidadeSolicitacoes != totalDetalhes) {
       final String msg = String.format(
-          "O Total de detalhes deve ser igual a quantidade de solicitações do Cabeçalho da Proposta! Quantidade do Cabeçalho: {%d} - Total de Detalhes: { %d",
-          quantidadeSolicitacoes,
-          totalDetalhes);
+        "O Total de detalhes deve ser igual a quantidade de solicitações do Cabeçalho da Proposta! Quantidade do Cabeçalho: {%d} - Total de Detalhes: { %d",
+        quantidadeSolicitacoes,
+        totalDetalhes);
 
+      log.debug(msg);
       return Optional.of(new ErroValidacao(CodigoRetornoErro.getByCodigoErro("334"), msg));
     }
+
+    log.debug("Quantidade de solicitações correta.");
 
     return super.isValid(propostaAcordo);
   }

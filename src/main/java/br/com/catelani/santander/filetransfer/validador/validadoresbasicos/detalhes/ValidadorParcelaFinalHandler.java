@@ -39,7 +39,6 @@ public class ValidadorParcelaFinalHandler extends ValidadorPropostaAcordoHandler
 
       validarParcelaFinalMenorQueInicial(detalhePropostaAcordos, erros);
       validarParcelaInicialEFinalDivergenteParaMesmaNegociacao(detalhePropostaAcordos, erros);
-
     });
 
     return erros;

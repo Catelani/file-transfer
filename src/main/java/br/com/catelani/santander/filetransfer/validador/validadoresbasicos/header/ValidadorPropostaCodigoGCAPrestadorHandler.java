@@ -3,12 +3,13 @@ package br.com.catelani.santander.filetransfer.validador.validadoresbasicos.head
 import br.com.catelani.santander.filetransfer.domain.CodigoRetornoErro;
 import br.com.catelani.santander.filetransfer.domain.DadosPrestador;
 import br.com.catelani.santander.filetransfer.domain.PropostaAcordo;
-import br.com.catelani.santander.filetransfer.util.StringUtils;
 import br.com.catelani.santander.filetransfer.validador.api.ErroValidacao;
 import br.com.catelani.santander.filetransfer.validador.api.ValidadorPropostaAcordoHandler;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;
+
+import static br.com.catelani.santander.filetransfer.util.StringUtils.isNullOrEmpty;
 
 /**
  * Valida se o Código GCA do Prestador foi preenchido corretamente.
@@ -25,12 +26,18 @@ public class ValidadorPropostaCodigoGCAPrestadorHandler extends ValidadorPropost
 
     final DadosPrestador dadosPrestador = propostaAcordo.getCabecalho().getDadosPrestador();
 
-    if (StringUtils.isNullOrEmpty(dadosPrestador.getCodigoGCA()) || !dadosPrestador.getCodigoGCA().matches("\\d{7}") || Long.parseLong(dadosPrestador.getCodigoGCA()) == 0) {
+    final String codigoGCA = dadosPrestador.getCodigoGCA();
+    if (isNullOrEmpty(codigoGCA) || !codigoGCA.matches("\\d{7}") || Long.parseLong(codigoGCA) == 0) {
+      log.debug("Código GCA do prestador [{}] inválido.", codigoGCA);
+      log.debug("O Código GCA do prestador deve ser preenchido, utilizar somente números, e ser diferente de 0.");
+
       final String msg = String.format("O Código GCA do prestador deve ser preenchido, utilizar somente números, e ser diferente de 0. O especificado foi {%s}",
-                                       dadosPrestador.getCodigoGCA());
+                                       codigoGCA);
 
       return Optional.of(new ErroValidacao(CodigoRetornoErro.getByCodigoErro("304"), msg));
     }
+
+    log.debug("Código GCA do prestador [{}] valido", codigoGCA);
 
     return super.isValid(propostaAcordo);
   }
