@@ -70,6 +70,7 @@ dependencyRecommendations {
 
 jmh {
   jmhVersion = '1.12'
+  includeTests = false
 }
 
 pmd {
