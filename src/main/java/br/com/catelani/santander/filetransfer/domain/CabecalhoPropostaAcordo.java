@@ -14,7 +14,7 @@ public class CabecalhoPropostaAcordo {
   /**
    * Tipo da Interface, nesse caso sera uma Proposta de Acordo
    */
-  private final TipoInterface tipoInterface = TipoInterface.PROPOSTA_DE_ACORDO;
+  private TipoInterface tipoInterface = TipoInterface.PROPOSTA_DE_ACORDO;
 
   /**
    * Tipo de Registro da Interface.
