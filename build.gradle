@@ -10,6 +10,7 @@ plugins {
   id 'nebula.dependency-lock' version '4.3.0'
   id 'nebula.nebula-release' version '4.0.1'
   id 'nebula.provided-base' version '3.1.0'
+  id "me.champeau.gradle.jmh" version "0.3.0"
 }
 
 apply plugin: 'java'
@@ -49,6 +50,9 @@ dependencies {
   // lombok
   provided group: 'org.projectlombok', name: 'lombok'
 
+// jmh
+  jmh 'org.openjdk.jmh:jmh-generator-annprocess:1.12'
+
   // tests
   testCompile group: 'junit', name: 'junit'
   testCompile group: 'org.hamcrest', name: 'hamcrest-all'
@@ -64,12 +68,22 @@ dependencyRecommendations {
   propertiesFile file: recomendationsFile
 }
 
+jmh {
+  jmhVersion = '1.12'
+}
+
 pmd {
+  sourceSets = [sourceSets.main, sourceSets.test]
   toolVersion = '5.4.2'
 }
 
 findbugs {
+  sourceSets = [sourceSets.main, sourceSets.test]
   excludeFilter = file("$projectDir/config/findbugs/ignore.xml")
+}
+
+jdepend {
+  sourceSets = [sourceSets.main, sourceSets.test]
 }
 
 // qa plugin configuration to export html instead of xml

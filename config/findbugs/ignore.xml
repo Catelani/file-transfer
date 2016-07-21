@@ -3,11 +3,17 @@
 <FindBugsFilter>
     <!-- Reclamações por conta dos campos com tipos fixos (Número de Sequencia, TipoRegistro) -->
     <Match>
-        <Class name="br.com.catelani.santander.filetransfer.domain.CabecalhoPropostaAcordo" />
+        <Class name="br.com.catelani.santander.filetransfer.domain.CabecalhoPropostaAcordo"/>
         <Bug code="SS,RCN"/>
     </Match>
     <Match>
-        <Class name="br.com.catelani.santander.filetransfer.domain.DetalhePropostaAcordo$DetalhesCompartilhados" />
+        <Class name="br.com.catelani.santander.filetransfer.domain.DetalhePropostaAcordo$DetalhesCompartilhados"/>
         <Bug code="SS,RCN"/>
+    </Match>
+    <Match>
+        <Or>
+            <Class name="~.*Benchmark.*"/>
+            <Class name="~org\.openjdk\.jmh.*" />
+        </Or>
     </Match>
 </FindBugsFilter>
