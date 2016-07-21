@@ -28,10 +28,8 @@ import java.util.stream.Collectors;
 class PropostaAcordoAsciiTableWriter implements PropostaAcordoWriter {
 
   private static final Logger log = LoggerFactory.getLogger(PropostaAcordoAsciiTableWriter.class);
-  private static final String CAMPO_EM_BRANCO = "";
   private static final byte[] QUEBRA_LINHA = "\n".getBytes(StandardCharsets.UTF_8);
-  private Object[] cabecalhoGeral;
-  private Object[] cabecalho;
+  private static final String CAMPO_EM_BRANCO = "";
 
   @Override
   public void gerarPropostaAcordo(@NotNull PropostaAcordo propostaAcordo, @NotNull OutputStream os) throws IOException {
@@ -227,83 +225,75 @@ class PropostaAcordoAsciiTableWriter implements PropostaAcordoWriter {
   }
 
   private Object[] getCabecalhoGeral() {
-    if (cabecalhoGeral == null) {
-      cabecalhoGeral = new Object[]{
-        null,
-        "Informações do File Transfer",
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        "Dados do Contrato",
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        "Dados da Negociação",
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        "Parcela do Acordo",
-        null,
-        null,
-        null,
-        "Retorno do Banco",
-        "Num. Sequencia"};
-    }
-
-    return cabecalhoGeral;
+    return new Object[]{
+      null,
+      "Informações do File Transfer",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "Dados do Contrato",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "Dados da Negociação",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "Parcela do Acordo",
+      null,
+      null,
+      null,
+      "Retorno do Banco",
+      "Num. Sequencia"};
   }
 
   private Object[] getCabecalho() {
-    if (cabecalho == null) {
-      cabecalho = new Object[]{
-        // informação Basica
-        "Tipo de Registro",
-        "Tipo de Carteira",
-        // Dados do contrato
-        "Num. Contrato",
-        "Parcelas Inicial",
-        "Parcelas Final",
-        "Data Vencimento Parc Maior Atraso",
-        "Valor Parcelas",
-        "Contrato Ajuizado?",
-        "GCA Contrato",
-        // Dados da Negociação
-        "GCA Dispensado",
-        "Valor Acordo Cliente",
-        "Valor Acordo sem Honorários",
-        "Código RPC",
-        "Exceção",
-        "Tipo Negociação",
-        "Val. Máximo Honorário",
-        "Desconto Honorário",
-        "Total de Parcelas Acordo",
-        // Parcela do Acordo
-        "Seq. Parcela Acordo",
-        "Data Vencimento",
-        "Qtd. Dias Atraso",
-        "Valor Total",
-        "Valor GCA",
-        "Valor Honorário",
-        // Retorno do Banco
-        "Cod Retorno Validação",
-        "Códigos de Erro",
-        "Acordo RPC",
-        "Linha Digitavel",
-        // Sequencia
-        "Num. Sequencia"
-      };
-    }
-
-    return cabecalho;
+    return new Object[]{
+      // informação Basica
+      "Tipo de Registro",
+      "Tipo de Carteira",
+      // Dados do contrato
+      "Num. Contrato",
+      "Parcelas Inicial",
+      "Parcelas Final",
+      "Data Vencimento Parc Maior Atraso",
+      "Valor Parcelas",
+      "Contrato Ajuizado?",
+      "GCA Contrato",
+      // Dados da Negociação
+      "GCA Dispensado",
+      "Valor Acordo Cliente",
+      "Valor Acordo sem Honorários",
+      "Código RPC",
+      "Exceção",
+      "Tipo Negociação",
+      "Val. Máximo Honorário",
+      "Desconto Honorário",
+      "Total de Parcelas Acordo",
+      // Parcela do Acordo
+      "Seq. Parcela Acordo",
+      "Data Vencimento",
+      "Qtd. Dias Atraso",
+      "Valor Total",
+      "Valor GCA",
+      "Valor Honorário",
+      // Retorno do Banco
+      "Cod Retorno Validação",
+      "Códigos de Erro",
+      "Acordo RPC",
+      "Linha Digitavel",
+      // Sequencia
+      "Num. Sequencia"
+    };
   }
 }
