@@ -1,5 +1,6 @@
 package br.com.catelani.santander.filetransfer.parser;
 
+import br.com.catelani.santander.filetransfer.qualifiers.AsciiTable;
 import com.google.inject.AbstractModule;
 
 /**
@@ -17,5 +18,8 @@ public class FileTransferModule extends AbstractModule {
     bind(DetalhePropostaFactory.class).to(DetalhePropostaFactoryImpl.class);
     bind(PropostaAcordoReader.class).to(PropostaAcordoReaderImpl.class);
     bind(PropostaAcordoWriter.class).to(PropostaAcordoWriterImpl.class);
+
+    // Implementação alternativa que gera ascii tables
+    bind(PropostaAcordoWriter.class).annotatedWith(AsciiTable.class).to(PropostaAcordoAsciiTableWriter.class);
   }
 }

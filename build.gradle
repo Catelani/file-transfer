@@ -1,15 +1,15 @@
 buildscript {
-    repositories { jcenter() }
-    dependencies {
-        classpath 'com.netflix.nebula:nebula-publishing-plugin:4.7.0'
-    }
+  repositories { jcenter() }
+  dependencies {
+    classpath 'com.netflix.nebula:nebula-publishing-plugin:4.7.0'
+  }
 }
 
 plugins {
-    id 'nebula.dependency-recommender' version '3.3.0'
-    id 'nebula.dependency-lock' version '4.3.0'
-    id 'nebula.nebula-release' version '4.0.1'
-    id 'nebula.provided-base' version '3.1.0'
+  id 'nebula.dependency-recommender' version '3.3.0'
+  id 'nebula.dependency-lock' version '4.3.0'
+  id 'nebula.nebula-release' version '4.0.1'
+  id 'nebula.provided-base' version '3.1.0'
 }
 
 apply plugin: 'java'
@@ -19,90 +19,113 @@ apply plugin: 'nebula.javadoc-jar'
 // QA plugins
 apply plugin: 'pmd'
 apply plugin: 'findbugs'
-apply plugin: 'build-dashboard'
 apply plugin: 'jacoco'
+apply plugin: 'jdepend'
+apply plugin: 'build-dashboard'
 
 group 'br.com.catelani.santander'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
-    mavenCentral()
+  mavenCentral()
 }
 
 dependencies {
-    compile 'org.slf4j:slf4j-api'
-    compile group: 'ch.qos.logback', name: 'logback-classic'
-    compile group: 'com.univocity', name: 'univocity-parsers'
-    compile 'org.jetbrains:annotations'
+  compile 'org.slf4j:slf4j-api'
+  compile group: 'ch.qos.logback', name: 'logback-classic'
+  compile group: 'com.univocity', name: 'univocity-parsers'
+  compile 'org.jetbrains:annotations'
 
-    compile 'com.google.inject:guice'
+  // google guice
+  compile 'com.google.inject:guice'
+  testCompile group: 'com.google.inject.extensions', name: 'guice-testlib'
 
-    // lombok
-    provided group: 'org.projectlombok', name: 'lombok'
+  // Para gerar ascii tables
+  compile 'de.vandermeer:asciitable'
 
-    // tests
-    testCompile group: 'junit', name: 'junit'
-    testCompile group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
+  // lombok
+  provided group: 'org.projectlombok', name: 'lombok'
+
+  // tests
+  testCompile group: 'junit', name: 'junit'
+  testCompile group: 'org.hamcrest', name: 'hamcrest-all'
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.12'
+  gradleVersion = '2.14'
 }
 
 def recomendationsFile = rootProject.file('dependencies-version.properties')
 
 dependencyRecommendations {
-    propertiesFile file: recomendationsFile
+  propertiesFile file: recomendationsFile
 }
 
 pmd {
-    toolVersion = '5.4.2'
+  toolVersion = '5.4.2'
 }
 
 findbugs {
-    excludeFilter = file("$projectDir/config/findbugs/ignore.xml")
+  excludeFilter = file("$projectDir/config/findbugs/ignore.xml")
 }
 
 // qa plugin configuration to export html instead of xml
 tasks.withType(FindBugs) {
-    reports {
-        html.enabled = true
-        xml.enabled = false
-    }
+  reports {
+    html.enabled = true
+    xml.enabled = false
+  }
 }
 
 tasks.withType(Pmd) {
-    reports {
-        html.enabled = true
-        xml.enabled = false
-    }
+  reports {
+    html.enabled = true
+    xml.enabled = false
+  }
+}
+
+tasks.withType(JDependReports) {
+  reports {
+    xml.enabled = true
+    csv.enabled = false
+  }
+}
+
+task jdependReport(dependsOn: jdependMain, group: 'verification', description: 'Generates a HTML report after executing jdepend checks.') << {
+  ant.xslt(in: "$buildDir/reports/jdepend/main.xml",
+           style: "$rootDir/config/jdepend/jdepend.xsl",
+           out: "$reporting.baseDir/jdepend/main.html")
+}
+
+check {
+  dependsOn += ['jdependReport']
 }
 
 jacoco {
-    toolVersion = '0.7.7.201606060606'
+  toolVersion = '0.7.7.201606060606'
 }
 
 jacocoTestReport {
-    reports {
-        xml.enabled false
-        csv.enabled false
-    }
+  reports {
+    xml.enabled false
+    csv.enabled false
+  }
 }
 
 jar {
-    manifest {
-        attributes('Implementation-Title': project.name,
-                'Implementation-Version': project.version,
-                'Implementation-Author': 'Catelani')
-    }
+  manifest {
+    attributes('Implementation-Title': project.name,
+               'Implementation-Version': project.version,
+               'Implementation-Author': 'Catelani')
+  }
 }
 
 task importJacocoTestReportOnTeamCity << {
-    logger.quiet("Notificando TeamCity para importar informações do JaCoCo")
-    logger.quiet("##teamcity[jacocoReport dataPath='build/jacoco/test.exec' includes='br.com.catelani.santander.filetransfer.*' classpath='+:build/classes/main/**/*.class']")
+  logger.quiet("Notificando TeamCity para importar informações do JaCoCo")
+  logger.quiet("##teamcity[jacocoReport dataPath='build/jacoco/test.exec' includes='br.com.catelani.santander.filetransfer.*' classpath='+:build/classes/main/**/*.class']")
 }
 
 importJacocoTestReportOnTeamCity.onlyIf { System.hasProperty('TEAMCITY_CI') || System.getenv('TEAMCITY_CI') }
