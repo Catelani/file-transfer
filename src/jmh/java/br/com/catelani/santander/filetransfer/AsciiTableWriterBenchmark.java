@@ -16,11 +16,15 @@ import javax.inject.Inject;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 /**
  * @author Kennedy Oliveira
  */
+@Warmup(iterations = 10, time = 1, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 5000, time = 1, timeUnit = TimeUnit.SECONDS)
+@Fork(1)
 @State(Scope.Thread)
 public class AsciiTableWriterBenchmark {
 
@@ -33,20 +37,38 @@ public class AsciiTableWriterBenchmark {
 
   private PropostaAcordo propostaAcordo;
 
+  @Param({"exemplos/ESCPA0001.dat", "exemplos/ESCPA0001_100.dat"})
+  public String caminhoArquivo;
+
   @Setup
   public void setup() throws IOException {
     Guice.createInjector(new FileTransferModule()).injectMembers(this);
-    final InputStream arquivoProposta = ClassLoader.getSystemResourceAsStream("exemplos/ESCPA0001.dat");
+    final InputStream arquivoProposta = ClassLoader.getSystemResourceAsStream(caminhoArquivo);
     this.propostaAcordo = propostaAcordoReader.parse(arquivoProposta);
   }
 
   @Benchmark
-  @BenchmarkMode({Mode.AverageTime, Mode.Throughput})
+  @BenchmarkMode(Mode.AverageTime)
   @OutputTimeUnit(TimeUnit.MILLISECONDS)
-  @Warmup(iterations = 20)
-  @Measurement(iterations = 10, time = 1, timeUnit = TimeUnit.SECONDS)
-  @Fork(1)
-  public String asciiTable() throws IOException {
+  public String average() throws IOException {
+    return gerarAsciiTable();
+  }
+
+  @Benchmark
+  @BenchmarkMode(Mode.Throughput)
+  @OutputTimeUnit(TimeUnit.SECONDS)
+  public String throughput() throws IOException {
+    return gerarAsciiTable();
+  }
+
+  @Benchmark
+  @BenchmarkMode(Mode.SampleTime)
+  @OutputTimeUnit(TimeUnit.MILLISECONDS)
+  public String sampleTime() throws IOException {
+    return gerarAsciiTable();
+  }
+
+  private String gerarAsciiTable() throws IOException {
     final ByteArrayOutputStream saida = new ByteArrayOutputStream();
     propostaAcordoWriter.gerarPropostaAcordo(propostaAcordo, saida);
     return new String(saida.toByteArray());
@@ -54,6 +76,7 @@ public class AsciiTableWriterBenchmark {
 
   // runner
   public static void main(String[] args) throws RunnerException {
+    new Scanner(System.in).next();
     final Options options = new OptionsBuilder()
       .include(AsciiTableWriterBenchmark.class.getSimpleName())
 //      .addProfiler(CompilerProfiler.class)
