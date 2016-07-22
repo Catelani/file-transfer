@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
  * @author Kennedy Oliveira
  */
 @Warmup(iterations = 10, time = 1, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 5000, time = 1, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 10, time = 1, timeUnit = TimeUnit.SECONDS)
 @Fork(1)
 @State(Scope.Thread)
 public class AsciiTableWriterBenchmark {
