@@ -1,13 +1,14 @@
 package br.com.catelani.santander.filetransfer.parser;
 
 import br.com.catelani.santander.filetransfer.domain.PropostaAcordo;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.OutputStream;
 
 /**
+ * Gerador de arquivos para {@link PropostaAcordo}.
+ *
  * @author Kennedy Oliveira
  * @since 1.0.0
  */

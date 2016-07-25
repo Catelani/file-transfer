@@ -6,7 +6,10 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * Factory para {@link CodigoRetornoErro}
+ *
  * @author Kennedy Oliveira
+ * @since 1.0.0
  */
 public interface ListaErroFactory {
   /**
