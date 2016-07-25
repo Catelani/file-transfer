@@ -47,10 +47,13 @@ dependencies {
   // Para gerar ascii tables
   compile 'de.vandermeer:asciitable'
 
+  // para suporte a linha de comando
+  compile group: 'commons-cli', name: 'commons-cli'
+
   // lombok
   provided group: 'org.projectlombok', name: 'lombok'
 
-// jmh
+  // jmh
   jmh 'org.openjdk.jmh:jmh-generator-annprocess:1.12'
 
   // tests
