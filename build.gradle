@@ -59,6 +59,7 @@ dependencies {
   // tests
   testCompile group: 'junit', name: 'junit'
   testCompile group: 'org.hamcrest', name: 'hamcrest-all'
+  testCompile group: 'com.github.stefanbirkner', name: 'system-rules'
 }
 
 task wrapper(type: Wrapper) {
