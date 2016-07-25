@@ -28,9 +28,11 @@ class CabecalhoPropostaAcordoFactoryImpl implements CabecalhoPropostaAcordoFacto
     final RetornoFinanceiraPA retornoFinanceira = buildRetornoFinanceira(strings);
 
     final String tipoRegistro = strings[0];
+    final TipoInterface tipoInterface = TipoInterface.getPorCodigoTipoInterface(strings[1]);
 
     final CabecalhoPropostaAcordo cabecalhoPropostaAcordo = new CabecalhoPropostaAcordo();
     cabecalhoPropostaAcordo.setTipoRegistro(TipoRegistro.getByTipoRegistro(tipoRegistro));
+    cabecalhoPropostaAcordo.setTipoInterface(tipoInterface);
     cabecalhoPropostaAcordo.setDadosPrestador(dadosPrestador);
     cabecalhoPropostaAcordo.setRetornoFinanceira(retornoFinanceira);
 
