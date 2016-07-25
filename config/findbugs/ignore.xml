@@ -13,7 +13,12 @@
     <Match>
         <Or>
             <Class name="~.*Benchmark.*"/>
-            <Class name="~org\.openjdk\.jmh.*" />
+            <Class name="~org\.openjdk\.jmh.*"/>
         </Or>
+    </Match>
+    <!-- Reclamação por conta de expor estado interno da classe ,nesse caso não tem problema por que é um array e de String -->
+    <Match>
+        <Class name="br.com.catelani.santander.filetransfer.cli.CliCommand"/>
+        <Method name="getCliArgs"/>
     </Match>
 </FindBugsFilter>
