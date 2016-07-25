@@ -27,8 +27,26 @@ public class PropostaAcordoAsciiTableWriterTest {
   }
 
   @Test
-  public void gerarPropostaAcordo() throws Exception {
-    final InputStream arquivoProposta = ClassLoader.getSystemResourceAsStream("exemplos/ESCPA0001.dat");
+  public void testGerarAsciiTableRetornoComErro() throws Exception {
+    final InputStream arquivoProposta = ClassLoader.getSystemResourceAsStream("exemplos/hf/erro/ESCRN0036.dat");
+
+    final PropostaAcordo propostaAcordo = propostaAcordoReader.parse(arquivoProposta);
+
+    propostaAcordoWriter.gerarPropostaAcordo(propostaAcordo, System.out);
+  }
+
+  @Test
+  public void testGerarAsciiTablePropostaAcordo() throws Exception {
+    final InputStream arquivoProposta = ClassLoader.getSystemResourceAsStream("exemplos/hf/erro/ESCPA0036.dat");
+
+    final PropostaAcordo propostaAcordo = propostaAcordoReader.parse(arquivoProposta);
+
+    propostaAcordoWriter.gerarPropostaAcordo(propostaAcordo, System.out);
+  }
+
+  @Test
+  public void testGerarAsciiTableProtocoloRecebimento() throws Exception {
+    final InputStream arquivoProposta = ClassLoader.getSystemResourceAsStream("exemplos/hf/erro/ESCPR0036.dat");
 
     final PropostaAcordo propostaAcordo = propostaAcordoReader.parse(arquivoProposta);
 

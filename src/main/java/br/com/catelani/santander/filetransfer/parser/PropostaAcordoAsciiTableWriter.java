@@ -67,8 +67,8 @@ class PropostaAcordoAsciiTableWriter implements PropostaAcordoWriter {
 
     // cebeçalho geral
     table.addRule();
-    table.addRow(null, null, null, null, null, null, null, null, null, null, null, null, null, null, "Cabeçalho")
-         .setAlignment(new char[]{'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c'});
+    table.addRow(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "Cabeçalho")
+         .setAlignment(new char[]{'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c'});
     table.addRule();
 
     // cabeçalho
@@ -78,6 +78,7 @@ class PropostaAcordoAsciiTableWriter implements PropostaAcordoWriter {
       "Tipo de Interface",
       // Dados do Prestador
       "Num. Caixa Postal",
+      "Codigo GCA",
       "Nome do Prestador",
       "Data da Remessa",
       "Hora da Remessa",
@@ -105,6 +106,7 @@ class PropostaAcordoAsciiTableWriter implements PropostaAcordoWriter {
       String.format("%s (%s)", cabecalho.getTipoInterface(), cabecalho.getTipoInterface().name()),
       // Dados do Prestador
       prestador.getCaixaPostal(),
+      prestador.getCodigoGCA(),
       prestador.getNome(),
       prestador.getDataRemessa(),
       prestador.getHoraRemessa(),
@@ -128,14 +130,13 @@ class PropostaAcordoAsciiTableWriter implements PropostaAcordoWriter {
 
   private void writeDetalhes(PropostaAcordo propostaAcordo, OutputStream outputStream) throws IOException {
     log.debug("Escrevendo os detalhes");
+    if (propostaAcordo.getDetalhes() == null || propostaAcordo.getDetalhes().isEmpty()) {
+      log.debug("Não há detalhes de propostas...");
+      return;
+    }
+
     // Configuração de Alinhamento Centralizado para o cabeçalho geral
     final char[] alinhamentoCentral = {'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c'};
-
-    // Cabeçalho geralzão que vai ficar em cima do cabeçalho normal, agrupando os campos
-
-
-    // cabeçalho para os detalhes das propostas
-
 
     final V2_AsciiTable table = new V2_AsciiTable();
     table.addRule();
@@ -210,7 +211,7 @@ class PropostaAcordoAsciiTableWriter implements PropostaAcordoWriter {
         parcela.getValorGca(),
         parcela.getValorHonorario(),
         // retorno do banco
-        retorno.getCodigoRetornoValidacao() != null ? retorno.getCodigoRetornoValidacao() : CAMPO_EM_BRANCO,
+        retorno.getCodigoRetornoValidacao() != null ? String.format("%s (%s)", retorno.getCodigoRetornoValidacao(), retorno.getCodigoRetornoValidacao().name()) : CAMPO_EM_BRANCO,
         !retorno.getCodigoRetornoErros().isEmpty() ? retorno.getCodigoRetornoErros().stream().map(CodigoRetornoErro::toString).collect(Collectors.joining(",")) : CAMPO_EM_BRANCO,
         retorno.getNumeroAcordoRPCGerado() != null ? retorno.getNumeroAcordoRPCGerado() : CAMPO_EM_BRANCO,
         retorno.getLinhaDigitavelBoletoGerado() != null ? retorno.getLinhaDigitavelBoletoGerado() : CAMPO_EM_BRANCO,
