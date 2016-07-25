@@ -90,7 +90,13 @@ class PropostaAcordoReaderImpl implements PropostaAcordoReader {
     }
   }
 
-  // TODO Documentar
+  /**
+   * Le as informações do Cabeçalho da Proposta a partir de uma {@link String} representando a primeira linha do arquivo.
+   *
+   * @param cabecalho Primeira linha do arquivo
+   * @return {@link CabecalhoPropostaAcordo}
+   * @throws NullPointerException Se o {@code cabecalho} for {@code null}
+   */
   private CabecalhoPropostaAcordo lerCabecalhoPropostaAcordo(@NotNull String cabecalho) {
     Objects.requireNonNull(cabecalho, "O cabecalho não pode ser nulo!");
 

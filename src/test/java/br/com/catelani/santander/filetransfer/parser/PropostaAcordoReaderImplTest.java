@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.hamcrest.core.AllOf.allOf;
 import static org.hamcrest.core.Is.is;
@@ -56,7 +56,7 @@ public class PropostaAcordoReaderImplTest {
     assertThat("caixa postal", dadosPrestador.getCaixaPostal(), is("0001"));
     assertThat("código GCA", dadosPrestador.getCodigoGCA(), is("0001094"));
     assertThat("nome do prestador", dadosPrestador.getNome(), is("A1 Soluções"));
-    //20160226
+    // 20160226
     assertThat("data da remessa do prestador", dadosPrestador.getDataRemessa(), is(LocalDate.of(2016, 2, 26)));
     // 175334
     assertThat("hora da remessa do prestador", dadosPrestador.getHoraRemessa(), is(LocalTime.of(17, 53, 34)));
@@ -172,5 +172,74 @@ public class PropostaAcordoReaderImplTest {
     assertThat(retornoFinanceira.getCodigoRetornoErros(), is(empty()));
     assertThat(retornoFinanceira.getNumeroAcordoRPCGerado(), is("00010121045"));
     assertThat(retornoFinanceira.getLinhaDigitavelBoletoGerado(), is("03399504617690018488891410001027267290000169588"));
+  }
+
+  @Test
+  public void lerRetornoComErro() throws Exception {
+    final InputStream arquivoProposta = ClassLoader.getSystemResourceAsStream("exemplos/hf/erro/ESCRN0036.DAT");
+
+    final PropostaAcordo propostaAcordo = propostaAcordoReader.parse(arquivoProposta, StandardCharsets.ISO_8859_1);
+
+    assertThat(propostaAcordo, is(notNullValue()));
+
+    final CabecalhoPropostaAcordo cabecalho = propostaAcordo.getCabecalho();
+    final RetornoFinanceiraPA retornoFinanceiraCabecalho = cabecalho.getRetornoFinanceira();
+
+    assertThat(retornoFinanceiraCabecalho.getDataRetorno(), is(LocalDate.of(2016, 7, 22)));
+    assertThat(retornoFinanceiraCabecalho.getHoraRetorno(), is(LocalTime.of(23, 5, 58)));
+    assertThat(retornoFinanceiraCabecalho.getTipoRetornoFinanceira(), is(TipoRetornoFinanceira.NORMAL));
+    assertThat(retornoFinanceiraCabecalho.getCodigoRetornoValidacao(), is(CodigoRetornoValidacao.HEADER_COM_ERRO));
+    assertThat(retornoFinanceiraCabecalho.getErros(), is(not(Collections.emptyList())));
+    assertThat(retornoFinanceiraCabecalho.getErros(), hasSize(2));
+    assertThat(retornoFinanceiraCabecalho.getErros(), contains(CodigoRetornoErro.getByCodigoErro("304"), CodigoRetornoErro.getByCodigoErro("303")));
+
+    final List<DetalhePropostaAcordo> detalhes = propostaAcordo.getDetalhes();
+    assertThat(detalhes, hasSize(1));
+
+    final DetalhePropostaAcordo detalheProposta = detalhes.get(0);
+    assertThat(detalheProposta.getSequencia(), is(2));
+
+    // dados do contrato
+    final DadosContrato dadosContrato = detalheProposta.getDadosContrato();
+    assertThat(dadosContrato.getNumeroContrato(), is("20021472358"));
+    assertThat(dadosContrato.getParcelaInicial(), is(28));
+    assertThat(dadosContrato.getParcelaFinal(), is(28));
+    assertThat(dadosContrato.getDataVencimentoParcelaMaiorAtraso(), is(LocalDate.of(2016, 6, 28))); // 20160628
+    assertThat(dadosContrato.getValorTotalParcelasNegociadas(), is(BigDecimal.valueOf(527.85D)));
+    assertThat(dadosContrato.isContratoAjuizado(), is(false));
+    assertThat(dadosContrato.getValorGCAContrato(), is(BigDecimal.valueOf(18.63D)));
+
+    // dados da negociação
+    final DadosNegociacao dadosNegociacao = detalheProposta.getDadosNegociacao();
+    assertThat(dadosNegociacao.getValorSaldoGCADispensado(), is(ZERO));
+    assertThat(dadosNegociacao.getValorTotalAcordo(), is(BigDecimal.valueOf(527.85D)));
+    assertThat(dadosNegociacao.getValorTotalAcordoSemHonorarios(), is(BigDecimal.valueOf(479.86D)));
+    assertThat(dadosNegociacao.getCodigoCampanhaRPC(), is("00615"));
+    assertThat(dadosNegociacao.isIndicadorExcecaoCampanha(), is(false));
+    assertThat(dadosNegociacao.getTipoNegociacao(), is(TipoNegociacao.ATUALIZACAO));
+    assertThat(dadosNegociacao.getValorHonorarioMaximoCampanha(), is(BigDecimal.valueOf(47.99)));
+    assertThat(dadosNegociacao.getDescontoHonorarios(), is(ZERO));
+    assertThat(dadosNegociacao.getQuantidadeParcelasAcordo(), is(1));
+
+    // parcela do acordo
+    final ParcelaAcordo parcelaAcordo = detalheProposta.getParcelaAcordo();
+    assertThat(parcelaAcordo.getSequencia(), is(1));
+    assertThat(parcelaAcordo.getDataVencimento(), is(LocalDate.of(2016, 7, 25)));
+    assertThat(parcelaAcordo.getQuantidadeDiasAtraso(), is(24));
+    assertThat(parcelaAcordo.getValorTotal(), is(BigDecimal.valueOf(527.85D)));
+    assertThat(parcelaAcordo.getValorGca(), is(BigDecimal.valueOf(18.63D)));
+    assertThat(parcelaAcordo.getValorHonorario(), is(BigDecimal.valueOf(47.99D)));
+
+    // retorno da financeira
+    final RetornoFinanceiraDetalhe retornoFinanceira = detalheProposta.getRetornoFinanceiraDetalhe();
+    assertThat(retornoFinanceira.getCodigoRetornoValidacao(), is(CodigoRetornoValidacao.ACORDO_COM_ERRO_DE_PREENCHIMENTO));
+    assertThat(retornoFinanceira.getCodigoRetornoErros(), is(not(empty())));
+    assertThat(retornoFinanceira.getCodigoRetornoErros(), contains(CodigoRetornoErro.getByCodigoErro("319"),
+                                                                   CodigoRetornoErro.getByCodigoErro("314"),
+                                                                   CodigoRetornoErro.getByCodigoErro("342"),
+                                                                   CodigoRetornoErro.getByCodigoErro("317"),
+                                                                   CodigoRetornoErro.getByCodigoErro("340")));
+    assertThat(retornoFinanceira.getNumeroAcordoRPCGerado(), is("00000000000"));
+    assertThat(retornoFinanceira.getLinhaDigitavelBoletoGerado(), is(nullValue()));
   }
 }

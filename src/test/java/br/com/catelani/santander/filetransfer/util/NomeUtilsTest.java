@@ -43,7 +43,7 @@ public class NomeUtilsTest {
     } catch (IllegalStateException e) { }
 
 
-    // todos os dados corretos agora5
+    // dados corretos agora
     dadosPrestador.setCaixaPostal("1234");
 
     final String nomeArquivoPropostaAcordo = NomeUtils.getNomeArquivoPropostaAcordo(propostaAcordo);
