@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
  * @since 1.0.0
  */
 @Slf4j
-public class Main {
+public class CliMain {
 
   public static void main(String[] args) throws ParseException {
     final Options options = getOptions();
@@ -27,6 +27,7 @@ public class Main {
       handleCli(args, options, cli);
     } catch (UnrecognizedOptionException e) {
       System.out.printf("Opção \"%s\" não reconhecida.", e.getOption());
+      System.out.println("Execute java -jar file-transfer-cli.jar -a para obter ajuda dos comandos disponíveis.");
     } catch (ParseException e) {
       System.out.println(e.getMessage());
     }
