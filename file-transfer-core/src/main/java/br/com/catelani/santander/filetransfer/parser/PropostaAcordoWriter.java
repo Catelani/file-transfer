@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
+ * Gerador de arquivos para {@link PropostaAcordo}.
+ *
  * @author Kennedy Oliveira
  * @since 1.0.0
  */

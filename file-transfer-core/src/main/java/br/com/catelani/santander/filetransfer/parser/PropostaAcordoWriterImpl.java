@@ -67,8 +67,8 @@ class PropostaAcordoWriterImpl implements PropostaAcordoWriter {
       csvHeaderWriter.writeRow(new String[]{
           cabecalho.getTipoRegistro().toString(),
           cabecalho.getTipoInterface().toString(),
-          dadosPrestador.getCaixaPostal(),
-          dadosPrestador.getCodigoGCA(),
+          leftPad(dadosPrestador.getCaixaPostal(), '0', 4),
+          leftPad(dadosPrestador.getCodigoGCA(), '0', 7),
           dadosPrestador.getNome(),
           DateUtils.format(dadosPrestador.getDataRemessa()),
           DateUtils.format(dadosPrestador.getHoraRemessa()),
