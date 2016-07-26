@@ -1,0 +1,482 @@
+{
+    "compile": {
+        "br.com.catelani.santander:file-transfer-core": {
+            "project": true
+        },
+        "ch.qos.logback:logback-classic": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "1.1.7"
+        },
+        "com.google.inject:guice": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "4.0-beta5"
+        },
+        "com.univocity:univocity-parsers": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "2.2.0"
+        },
+        "commons-cli:commons-cli": {
+            "locked": "1.3.1"
+        },
+        "de.vandermeer:asciitable": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "0.2.5"
+        },
+        "org.jetbrains:annotations": {
+            "locked": "15.0"
+        },
+        "org.projectlombok:lombok": {
+            "locked": "1.16.10"
+        },
+        "org.slf4j:slf4j-api": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "1.7.21"
+        }
+    },
+    "compileClasspath": {
+        "br.com.catelani.santander:file-transfer-core": {
+            "project": true
+        },
+        "ch.qos.logback:logback-classic": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "1.1.7"
+        },
+        "com.google.inject:guice": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "4.0-beta5"
+        },
+        "com.univocity:univocity-parsers": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "2.2.0"
+        },
+        "commons-cli:commons-cli": {
+            "locked": "1.3.1"
+        },
+        "de.vandermeer:asciitable": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "0.2.5"
+        },
+        "org.jetbrains:annotations": {
+            "locked": "15.0"
+        },
+        "org.projectlombok:lombok": {
+            "locked": "1.16.10"
+        },
+        "org.slf4j:slf4j-api": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "1.7.21"
+        }
+    },
+    "compileOnly": {
+        "br.com.catelani.santander:file-transfer-core": {
+            "project": true
+        },
+        "ch.qos.logback:logback-classic": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "1.1.7"
+        },
+        "com.google.inject:guice": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "4.0-beta5"
+        },
+        "com.univocity:univocity-parsers": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "2.2.0"
+        },
+        "commons-cli:commons-cli": {
+            "locked": "1.3.1"
+        },
+        "de.vandermeer:asciitable": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "0.2.5"
+        },
+        "org.jetbrains:annotations": {
+            "locked": "15.0"
+        },
+        "org.projectlombok:lombok": {
+            "locked": "1.16.10"
+        },
+        "org.slf4j:slf4j-api": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "1.7.21"
+        }
+    },
+    "default": {
+        "br.com.catelani.santander:file-transfer-core": {
+            "project": true
+        },
+        "ch.qos.logback:logback-classic": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "1.1.7"
+        },
+        "com.google.inject:guice": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "4.0-beta5"
+        },
+        "com.univocity:univocity-parsers": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "2.2.0"
+        },
+        "commons-cli:commons-cli": {
+            "locked": "1.3.1"
+        },
+        "de.vandermeer:asciitable": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "0.2.5"
+        },
+        "org.jetbrains:annotations": {
+            "project": true
+        },
+        "org.projectlombok:lombok": {
+            "project": true
+        },
+        "org.slf4j:slf4j-api": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "1.7.21"
+        }
+    },
+    "findbugs": {
+        "com.google.code.findbugs:findbugs": {
+            "locked": "3.0.1"
+        }
+    },
+    "jacocoAgent": {
+        "org.jacoco:org.jacoco.agent": {
+            "locked": "0.7.7.201606060606"
+        }
+    },
+    "jacocoAnt": {
+        "org.jacoco:org.jacoco.ant": {
+            "locked": "0.7.7.201606060606"
+        }
+    },
+    "jdepend": {
+        "jdepend:jdepend": {
+            "locked": "2.9.1"
+        },
+        "org.apache.ant:ant-jdepend": {
+            "locked": "1.9.6"
+        }
+    },
+    "pmd": {
+        "net.sourceforge.pmd:pmd-java": {
+            "locked": "5.4.2"
+        }
+    },
+    "provided": {
+        "org.jetbrains:annotations": {
+            "locked": "15.0"
+        },
+        "org.projectlombok:lombok": {
+            "locked": "1.16.10"
+        }
+    },
+    "runtime": {
+        "br.com.catelani.santander:file-transfer-core": {
+            "project": true
+        },
+        "ch.qos.logback:logback-classic": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "1.1.7"
+        },
+        "com.google.inject:guice": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "4.0-beta5"
+        },
+        "com.univocity:univocity-parsers": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "2.2.0"
+        },
+        "commons-cli:commons-cli": {
+            "locked": "1.3.1"
+        },
+        "de.vandermeer:asciitable": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "0.2.5"
+        },
+        "org.jetbrains:annotations": {
+            "locked": "15.0"
+        },
+        "org.projectlombok:lombok": {
+            "locked": "1.16.10"
+        },
+        "org.slf4j:slf4j-api": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "1.7.21"
+        }
+    },
+    "testCompile": {
+        "br.com.catelani.santander:file-transfer-core": {
+            "project": true
+        },
+        "ch.qos.logback:logback-classic": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "1.1.7"
+        },
+        "com.github.stefanbirkner:system-rules": {
+            "locked": "1.16.0"
+        },
+        "com.google.inject.extensions:guice-testlib": {
+            "locked": "4.0-beta5"
+        },
+        "com.google.inject:guice": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "4.0-beta5"
+        },
+        "com.univocity:univocity-parsers": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "2.2.0"
+        },
+        "commons-cli:commons-cli": {
+            "locked": "1.3.1"
+        },
+        "de.vandermeer:asciitable": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "0.2.5"
+        },
+        "junit:junit": {
+            "locked": "4.12"
+        },
+        "org.hamcrest:hamcrest-all": {
+            "locked": "1.3"
+        },
+        "org.jetbrains:annotations": {
+            "locked": "15.0"
+        },
+        "org.projectlombok:lombok": {
+            "locked": "1.16.10"
+        },
+        "org.slf4j:slf4j-api": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "1.7.21"
+        }
+    },
+    "testCompileClasspath": {
+        "br.com.catelani.santander:file-transfer-core": {
+            "project": true
+        },
+        "ch.qos.logback:logback-classic": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "1.1.7"
+        },
+        "com.github.stefanbirkner:system-rules": {
+            "locked": "1.16.0"
+        },
+        "com.google.inject.extensions:guice-testlib": {
+            "locked": "4.0-beta5"
+        },
+        "com.google.inject:guice": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "4.0-beta5"
+        },
+        "com.univocity:univocity-parsers": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "2.2.0"
+        },
+        "commons-cli:commons-cli": {
+            "locked": "1.3.1"
+        },
+        "de.vandermeer:asciitable": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "0.2.5"
+        },
+        "junit:junit": {
+            "locked": "4.12"
+        },
+        "org.hamcrest:hamcrest-all": {
+            "locked": "1.3"
+        },
+        "org.jetbrains:annotations": {
+            "locked": "15.0"
+        },
+        "org.projectlombok:lombok": {
+            "locked": "1.16.10"
+        },
+        "org.slf4j:slf4j-api": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "1.7.21"
+        }
+    },
+    "testCompileOnly": {
+        "br.com.catelani.santander:file-transfer-core": {
+            "project": true
+        },
+        "ch.qos.logback:logback-classic": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "1.1.7"
+        },
+        "com.github.stefanbirkner:system-rules": {
+            "locked": "1.16.0"
+        },
+        "com.google.inject.extensions:guice-testlib": {
+            "locked": "4.0-beta5"
+        },
+        "com.google.inject:guice": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "4.0-beta5"
+        },
+        "com.univocity:univocity-parsers": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "2.2.0"
+        },
+        "commons-cli:commons-cli": {
+            "locked": "1.3.1"
+        },
+        "de.vandermeer:asciitable": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "0.2.5"
+        },
+        "junit:junit": {
+            "locked": "4.12"
+        },
+        "org.hamcrest:hamcrest-all": {
+            "locked": "1.3"
+        },
+        "org.jetbrains:annotations": {
+            "locked": "15.0"
+        },
+        "org.projectlombok:lombok": {
+            "locked": "1.16.10"
+        },
+        "org.slf4j:slf4j-api": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "1.7.21"
+        }
+    },
+    "testRuntime": {
+        "br.com.catelani.santander:file-transfer-core": {
+            "project": true
+        },
+        "ch.qos.logback:logback-classic": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "1.1.7"
+        },
+        "com.github.stefanbirkner:system-rules": {
+            "locked": "1.16.0"
+        },
+        "com.google.inject.extensions:guice-testlib": {
+            "locked": "4.0-beta5"
+        },
+        "com.google.inject:guice": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "4.0-beta5"
+        },
+        "com.univocity:univocity-parsers": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "2.2.0"
+        },
+        "commons-cli:commons-cli": {
+            "locked": "1.3.1"
+        },
+        "de.vandermeer:asciitable": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "0.2.5"
+        },
+        "junit:junit": {
+            "locked": "4.12"
+        },
+        "org.hamcrest:hamcrest-all": {
+            "locked": "1.3"
+        },
+        "org.jetbrains:annotations": {
+            "locked": "15.0"
+        },
+        "org.projectlombok:lombok": {
+            "locked": "1.16.10"
+        },
+        "org.slf4j:slf4j-api": {
+            "firstLevelTransitive": [
+                "br.com.catelani.santander:file-transfer-core"
+            ],
+            "locked": "1.7.21"
+        }
+    }
+}

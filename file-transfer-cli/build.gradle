@@ -1,0 +1,6 @@
+dependencies {
+  compile project(':file-transfer-core')
+
+  // para suporte a linha de comando
+  compile group: 'commons-cli', name: 'commons-cli'
+}

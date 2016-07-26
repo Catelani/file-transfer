@@ -1,0 +1,13 @@
+plugins {
+  id 'me.champeau.gradle.jmh' version '0.3.0'
+}
+
+dependencies {
+  // jmh
+  jmh 'org.openjdk.jmh:jmh-generator-annprocess:1.12'
+}
+
+jmh {
+  jmhVersion = '1.12'
+  includeTests = false
+}

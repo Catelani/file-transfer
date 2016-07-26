@@ -1,2 +1,5 @@
 rootProject.name = 'file-transfer'
 
+include 'file-transfer-core'
+include 'file-transfer-cli'
+
