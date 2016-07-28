@@ -116,7 +116,7 @@ class PropostaAcordoAsciiTableWriter implements PropostaAcordoWriter {
       retornoFinanceira.getDataRetorno() != null ? retornoFinanceira.getDataRetorno().toString() : CAMPO_EM_BRANCO,
       retornoFinanceira.getHoraRetorno() != null ? retornoFinanceira.getHoraRetorno().toString() : CAMPO_EM_BRANCO,
       retornoFinanceira.getTipoRetornoFinanceira() != null ? retornoFinanceira.getTipoRetornoFinanceira().name() : CAMPO_EM_BRANCO,
-      retornoFinanceira.getCodigoRetornoValidacao() != null ? retornoFinanceira.getTipoRetornoFinanceira().name() : CAMPO_EM_BRANCO,
+      retornoFinanceira.getCodigoRetornoValidacao() != null ? retornoFinanceira.getCodigoRetornoValidacao().name() : CAMPO_EM_BRANCO,
       retornoFinanceira.getErros().stream().map(CodigoRetornoErro::name).collect(Collectors.joining(",")),
       // Sequencia
       cabecalho.getNumeroDeSequencia());
