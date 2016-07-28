@@ -147,8 +147,8 @@ task importJacocoTestReportOnTeamCity << {
 
   def projetos = ['file-transfer-cli', 'file-transfer-core']
   def dataPath = projetos.collect { "${project(it).buildDir}/jacoco/test.exec" }.join(' ')
-  def classPath = projetos.collect { "${project(it).buildDir}/classes/main/**/*.class" }.join(' ')
+  def classPath = projetos.collect { "+:${project(it).buildDir}/classes/main/**/*.class" }.join(' ')
 
   logger.quiet(
-      "##teamcity[jacocoReport dataPath='${dataPath}' includes='br.com.catelani.santander.filetransfer.*' classpath='+:${classPath}']")
+      "##teamcity[jacocoReport dataPath='${dataPath}' includes='br.com.catelani.santander.filetransfer.*' classpath='${classPath}']")
 }
