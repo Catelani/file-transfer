@@ -7,9 +7,8 @@ import de.vandermeer.asciitable.v2.V2_AsciiTable;
 import de.vandermeer.asciitable.v2.render.V2_AsciiTableRenderer;
 import de.vandermeer.asciitable.v2.render.WidthLongestWordMinCol;
 import de.vandermeer.asciitable.v2.themes.V2_E_TableThemes;
+import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -24,10 +23,10 @@ import java.util.stream.Collectors;
  * @author Kennedy Oliveira
  * @since 1.0.0
  */
+@Slf4j
 @AsciiTable
 class PropostaAcordoAsciiTableWriter implements PropostaAcordoWriter {
 
-  private static final Logger log = LoggerFactory.getLogger(PropostaAcordoAsciiTableWriter.class);
   private static final byte[] QUEBRA_LINHA = "\n".getBytes(StandardCharsets.UTF_8);
   private static final String CAMPO_EM_BRANCO = "";
 

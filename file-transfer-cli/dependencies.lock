@@ -4,9 +4,6 @@
             "project": true
         },
         "ch.qos.logback:logback-classic": {
-            "firstLevelTransitive": [
-                "br.com.catelani.santander:file-transfer-core"
-            ],
             "locked": "1.1.7"
         },
         "com.google.inject:guice": {
@@ -40,7 +37,7 @@
             "firstLevelTransitive": [
                 "br.com.catelani.santander:file-transfer-core"
             ],
-            "locked": "1.7.21"
+            "locked": "1.7.20"
         }
     },
     "compileClasspath": {
@@ -48,9 +45,6 @@
             "project": true
         },
         "ch.qos.logback:logback-classic": {
-            "firstLevelTransitive": [
-                "br.com.catelani.santander:file-transfer-core"
-            ],
             "locked": "1.1.7"
         },
         "com.google.inject:guice": {
@@ -84,7 +78,7 @@
             "firstLevelTransitive": [
                 "br.com.catelani.santander:file-transfer-core"
             ],
-            "locked": "1.7.21"
+            "locked": "1.7.20"
         }
     },
     "compileOnly": {
@@ -92,9 +86,6 @@
             "project": true
         },
         "ch.qos.logback:logback-classic": {
-            "firstLevelTransitive": [
-                "br.com.catelani.santander:file-transfer-core"
-            ],
             "locked": "1.1.7"
         },
         "com.google.inject:guice": {
@@ -128,7 +119,7 @@
             "firstLevelTransitive": [
                 "br.com.catelani.santander:file-transfer-core"
             ],
-            "locked": "1.7.21"
+            "locked": "1.7.20"
         }
     },
     "default": {
@@ -136,10 +127,7 @@
             "project": true
         },
         "ch.qos.logback:logback-classic": {
-            "firstLevelTransitive": [
-                "br.com.catelani.santander:file-transfer-core"
-            ],
-            "locked": "1.1.7"
+            "project": true
         },
         "com.google.inject:guice": {
             "firstLevelTransitive": [
@@ -172,7 +160,13 @@
             "firstLevelTransitive": [
                 "br.com.catelani.santander:file-transfer-core"
             ],
-            "locked": "1.7.21"
+            "locked": "1.7.20"
+        }
+    },
+    "fatJar": {
+        "org.slf4j:slf4j-nop": {
+            "locked": "1.7.20",
+            "requested": "1.7.20"
         }
     },
     "findbugs": {
@@ -204,6 +198,9 @@
         }
     },
     "provided": {
+        "ch.qos.logback:logback-classic": {
+            "locked": "1.1.7"
+        },
         "org.jetbrains:annotations": {
             "locked": "15.0"
         },
@@ -216,9 +213,6 @@
             "project": true
         },
         "ch.qos.logback:logback-classic": {
-            "firstLevelTransitive": [
-                "br.com.catelani.santander:file-transfer-core"
-            ],
             "locked": "1.1.7"
         },
         "com.google.inject:guice": {
@@ -252,7 +246,7 @@
             "firstLevelTransitive": [
                 "br.com.catelani.santander:file-transfer-core"
             ],
-            "locked": "1.7.21"
+            "locked": "1.7.20"
         }
     },
     "testCompile": {
@@ -260,9 +254,6 @@
             "project": true
         },
         "ch.qos.logback:logback-classic": {
-            "firstLevelTransitive": [
-                "br.com.catelani.santander:file-transfer-core"
-            ],
             "locked": "1.1.7"
         },
         "com.github.stefanbirkner:system-rules": {
@@ -308,7 +299,7 @@
             "firstLevelTransitive": [
                 "br.com.catelani.santander:file-transfer-core"
             ],
-            "locked": "1.7.21"
+            "locked": "1.7.20"
         }
     },
     "testCompileClasspath": {
@@ -316,9 +307,6 @@
             "project": true
         },
         "ch.qos.logback:logback-classic": {
-            "firstLevelTransitive": [
-                "br.com.catelani.santander:file-transfer-core"
-            ],
             "locked": "1.1.7"
         },
         "com.github.stefanbirkner:system-rules": {
@@ -364,7 +352,7 @@
             "firstLevelTransitive": [
                 "br.com.catelani.santander:file-transfer-core"
             ],
-            "locked": "1.7.21"
+            "locked": "1.7.20"
         }
     },
     "testCompileOnly": {
@@ -372,9 +360,6 @@
             "project": true
         },
         "ch.qos.logback:logback-classic": {
-            "firstLevelTransitive": [
-                "br.com.catelani.santander:file-transfer-core"
-            ],
             "locked": "1.1.7"
         },
         "com.github.stefanbirkner:system-rules": {
@@ -420,7 +405,7 @@
             "firstLevelTransitive": [
                 "br.com.catelani.santander:file-transfer-core"
             ],
-            "locked": "1.7.21"
+            "locked": "1.7.20"
         }
     },
     "testRuntime": {
@@ -428,9 +413,6 @@
             "project": true
         },
         "ch.qos.logback:logback-classic": {
-            "firstLevelTransitive": [
-                "br.com.catelani.santander:file-transfer-core"
-            ],
             "locked": "1.1.7"
         },
         "com.github.stefanbirkner:system-rules": {
@@ -476,7 +458,7 @@
             "firstLevelTransitive": [
                 "br.com.catelani.santander:file-transfer-core"
             ],
-            "locked": "1.7.21"
+            "locked": "1.7.20"
         }
     }
 }

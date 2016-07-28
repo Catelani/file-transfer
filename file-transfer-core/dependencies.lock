@@ -19,7 +19,7 @@
             "locked": "1.16.10"
         },
         "org.slf4j:slf4j-api": {
-            "locked": "1.7.21"
+            "locked": "1.7.20"
         }
     },
     "compileClasspath": {
@@ -42,7 +42,7 @@
             "locked": "1.16.10"
         },
         "org.slf4j:slf4j-api": {
-            "locked": "1.7.21"
+            "locked": "1.7.20"
         }
     },
     "compileOnly": {
@@ -65,12 +65,12 @@
             "locked": "1.16.10"
         },
         "org.slf4j:slf4j-api": {
-            "locked": "1.7.21"
+            "locked": "1.7.20"
         }
     },
     "default": {
         "ch.qos.logback:logback-classic": {
-            "locked": "1.1.7"
+            "project": true
         },
         "com.google.inject:guice": {
             "locked": "4.0-beta5"
@@ -88,7 +88,7 @@
             "project": true
         },
         "org.slf4j:slf4j-api": {
-            "locked": "1.7.21"
+            "locked": "1.7.20"
         }
     },
     "findbugs": {
@@ -132,6 +132,9 @@
         }
     },
     "provided": {
+        "ch.qos.logback:logback-classic": {
+            "locked": "1.1.7"
+        },
         "org.jetbrains:annotations": {
             "locked": "15.0"
         },
@@ -159,7 +162,7 @@
             "locked": "1.16.10"
         },
         "org.slf4j:slf4j-api": {
-            "locked": "1.7.21"
+            "locked": "1.7.20"
         }
     },
     "testCompile": {
@@ -194,7 +197,7 @@
             "locked": "1.16.10"
         },
         "org.slf4j:slf4j-api": {
-            "locked": "1.7.21"
+            "locked": "1.7.20"
         }
     },
     "testCompileClasspath": {
@@ -229,7 +232,7 @@
             "locked": "1.16.10"
         },
         "org.slf4j:slf4j-api": {
-            "locked": "1.7.21"
+            "locked": "1.7.20"
         }
     },
     "testCompileOnly": {
@@ -264,7 +267,7 @@
             "locked": "1.16.10"
         },
         "org.slf4j:slf4j-api": {
-            "locked": "1.7.21"
+            "locked": "1.7.20"
         }
     },
     "testRuntime": {
@@ -299,7 +302,7 @@
             "locked": "1.16.10"
         },
         "org.slf4j:slf4j-api": {
-            "locked": "1.7.21"
+            "locked": "1.7.20"
         }
     }
 }
