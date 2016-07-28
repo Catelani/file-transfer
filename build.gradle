@@ -65,10 +65,6 @@ subprojects {
     testCompile group: 'com.github.stefanbirkner', name: 'system-rules'
   }
 
-  task wrapper(type: Wrapper) {
-    gradleVersion = '2.14'
-  }
-
   def recomendationsFile = rootProject.file('dependencies-version.properties')
 
   dependencyRecommendations {
@@ -150,4 +146,8 @@ subprojects {
 
   importJacocoTestReportOnTeamCity.onlyIf { System.hasProperty('TEAMCITY_CI') || System.getenv('TEAMCITY_CI') }
   jacocoTestReport.finalizedBy importJacocoTestReportOnTeamCity
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '2.14.1'
 }
