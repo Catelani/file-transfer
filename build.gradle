@@ -136,18 +136,19 @@ subprojects {
                  'Implementation-Author': 'Catelani')
     }
   }
-
-  // TODO Imprimir o caminho correto para cada projeto
-  task importJacocoTestReportOnTeamCity << {
-    logger.quiet("Notificando TeamCity para importar informações do JaCoCo")
-    logger.quiet(
-        "##teamcity[jacocoReport dataPath='${project.buildDir}/jacoco/test.exec' includes='br.com.catelani.santander.filetransfer.*' classpath='+:${project.buildDir}/classes/main/**/*.class']")
-  }
-
-  importJacocoTestReportOnTeamCity.onlyIf { System.hasProperty('TEAMCITY_CI') || System.getenv('TEAMCITY_CI') }
-  jacocoTestReport.finalizedBy importJacocoTestReportOnTeamCity
 }
 
 task wrapper(type: Wrapper) {
   gradleVersion = '2.14.1'
+}
+
+task importJacocoTestReportOnTeamCity << {
+  logger.quiet("Notificando TeamCity para importar informações do JaCoCo")
+
+  def projetos = ['file-transfer-cli', 'file-transfer-core']
+  def dataPath = projetos.collect { "${project(it).buildDir}/jacoco/test.exec" }.join(' ')
+  def classPath = projetos.collect { "${project(it).buildDir}/classes/main/**/*.class" }.join(' ')
+
+  logger.quiet(
+      "##teamcity[jacocoReport dataPath='${dataPath}' includes='br.com.catelani.santander.filetransfer.*' classpath='+:${classPath}']")
 }
