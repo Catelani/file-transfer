@@ -18,7 +18,7 @@ dependencies {
 task fatJar(type: Jar, group: 'build') {
   manifest {
     attributes 'Implementation-Title': 'File Transfer CLI',
-               'Implementation-Version': version,
+               'Implementation-Version': "${project.version}",
                'Main-Class': 'br.com.catelani.santander.filetransfer.cli.CliMain'
   }
   baseName = project.name
