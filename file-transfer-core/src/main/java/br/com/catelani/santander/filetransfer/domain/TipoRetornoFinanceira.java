@@ -17,6 +17,7 @@ public enum TipoRetornoFinanceira {
    * o número do acordo gerado e o Boleto da primeira parcela deste Acordo.
    */
   NORMAL("N"),
+
   /**
    * Retorno contento a aprovação ou recusa das Propostas de Exceção, e para os Acordos de Exceção aprovados,
    * o número do Acordo gerado e o Boleto da primeira parcela.

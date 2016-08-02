@@ -115,7 +115,7 @@ class DetalhePropostaFactoryImpl implements DetalhePropostaFactory {
     parcelaAcordo.setSequencia(Integer.parseInt(sequenciaParcelaAcordo));
     parcelaAcordo.setDataVencimento(DateUtils.parseDate(dataVencimentoParcelaAcordo));
     parcelaAcordo.setQuantidadeDiasAtraso(Integer.parseInt(quantidadeDiasAtrasoParcelaAcordo));
-    parcelaAcordo.setValorTotal(BigDecimalUtils.parseBigDecimal(valorTotalParcelaAcordo)); // TODO Criar forma de ler os big decimal corretamente
+    parcelaAcordo.setValorTotal(BigDecimalUtils.parseBigDecimal(valorTotalParcelaAcordo));
     parcelaAcordo.setValorGca(BigDecimalUtils.parseBigDecimal(valorGCAParcelaAcordo));
     parcelaAcordo.setValorHonorario(BigDecimalUtils.parseBigDecimal(valorHonorarioParcelaAcordo));
 

@@ -32,15 +32,20 @@ public enum TipoRegistro {
   }
 
   /**
+   * Busca um {@link TipoRegistro} através de um {@code codigoTipoRegistro}.
+   *
+   * @param codigoTipoRegistro Codigo tipo registro para buscar.
+   * @return {@link TipoRegistro}
+   */
+  public static TipoRegistro getByTipoRegistro(String codigoTipoRegistro) {
+    return valores.get(codigoTipoRegistro);
+  }
+
+  /**
    * @return O Tipo de Registro a ser inserido no cabeçalho da Interface de PA.
    */
   @Override
   public String toString() {
     return tipoRegistro;
-  }
-
-  // TODO Documentar
-  public static TipoRegistro getByTipoRegistro(String tipoRegistro) {
-    return valores.get(tipoRegistro);
   }
 }

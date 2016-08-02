@@ -36,9 +36,14 @@ public enum TipoCarteira {
     this.tipoCarteira = tipoCarteira;
   }
 
-  // TODO Documentar
-  public static TipoCarteira getByTipo(String tipo) {
-    return mapByTipo.get(tipo);
+  /**
+   * Busca um {@link TipoCarteira} através de seu código.
+   *
+   * @param codigoTipo codigo do tipo de carteira.
+   * @return Um {@link TipoCarteira}
+   */
+  public static TipoCarteira getByTipo(String codigoTipo) {
+    return mapByTipo.get(codigoTipo);
   }
 
   /**

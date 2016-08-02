@@ -13,9 +13,22 @@ import java.util.Map;
  */
 public enum TipoInterface {
 
-  // TODO Documentar
+  /**
+   * Proposta de acordo é o tipo de interface que inicia a comunicação com o banco, é enviada do ESCOB para o Banco
+   * para aprovação dos acordos e geração das laminas.
+   */
   PROPOSTA_DE_ACORDO("PA"),
+
+  /**
+   * Retorno de uma {@link #PROPOSTA_DE_ACORDO}, nessa interface constara as validações, acordos, laminas e todas as informações
+   * pertinentes de resposta a uma {@link #PROPOSTA_DE_ACORDO}, será devolvida após o processamento da {@link #PROPOSTA_DE_ACORDO}
+   */
   RETORNO_FINANCEIRA("RT"),
+
+  /**
+   * Interface que é enviada do banco para o ESCOB em resposta a um envia de {@link #PROPOSTA_DE_ACORDO}, esse tipo de interface
+   * é apenas um marcador de recebimento.
+   */
   PROTOCOLO_DE_RECEBIMENTO("PR");
 
   private final static Map<String, TipoInterface> mapByTipo;

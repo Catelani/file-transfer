@@ -47,7 +47,12 @@ public enum CodigoRetornoValidacao {
     this.codigoString = codigoString;
   }
 
-  // TODO Documentar
+  /**
+   * Busca um {@link CodigoRetornoValidacao} através de um {@code codigo}
+   *
+   * @param codigo Codigo para buscar.
+   * @return {@link CodigoRetornoValidacao}
+   */
   public static CodigoRetornoValidacao getByCodigo(String codigo) {
     return mapByCodigoRetorno.get(codigo);
   }

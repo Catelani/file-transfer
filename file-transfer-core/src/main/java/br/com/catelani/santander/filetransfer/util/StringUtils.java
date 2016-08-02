@@ -18,7 +18,7 @@ public class StringUtils {
    * @param s String a ser verificada.
    * @return True caso for nula e vazia, False do contrario.
    */
-  @Contract(pure = true)
+  @Contract(value = "null -> true", pure = true)
   public static boolean isNullOrEmpty(String s) {
     return s == null || s.length() == 0;
   }

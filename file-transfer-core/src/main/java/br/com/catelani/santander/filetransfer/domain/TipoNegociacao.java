@@ -44,9 +44,14 @@ public enum TipoNegociacao {
     this.tipoNegociacao = tipoNegociacao;
   }
 
-  // TODO Documentar
-  public static TipoNegociacao getByTipo(String tipo) {
-    return mapByTipo.get(tipo);
+  /**
+   * Busca um {@link TipoNegociacao} através de um {@code codigoTipo}
+   *
+   * @param codigoTipo Codigo tipo para buscar.
+   * @return {@link TipoNegociacao}
+   */
+  public static TipoNegociacao getByTipo(String codigoTipo) {
+    return mapByTipo.get(codigoTipo);
   }
 
   @Override

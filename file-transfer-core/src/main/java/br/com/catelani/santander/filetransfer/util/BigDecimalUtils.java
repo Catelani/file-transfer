@@ -6,6 +6,8 @@ import org.jetbrains.annotations.Nullable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+import static br.com.catelani.santander.filetransfer.util.StringUtils.isNullOrEmpty;
+
 /**
  * Métodos utilitarios para trabalhar com {@link BigDecimal} e as informações que vem do banco.
  *
@@ -23,10 +25,9 @@ public class BigDecimalUtils {
    * @param valor Valor a ser convertido.
    * @return Se o valor for nulo ou tiver tamanho diferente de 15 retorna {@link BigDecimal#ZERO}, do contrario devolve o valor.
    */
-  // TODO Arrumar um nome melhor pra isso
   @Contract(pure = true)
   public static BigDecimal parseBigDecimal(@Nullable String valor) {
-    if (StringUtils.isNullOrEmpty(valor))
+    if (isNullOrEmpty(valor))
       return BigDecimal.ZERO;
 
     if (valor.length() != 15)
