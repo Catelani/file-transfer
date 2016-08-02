@@ -4,6 +4,7 @@ import br.com.catelani.santander.filetransfer.domain.*;
 import br.com.catelani.santander.filetransfer.util.BigDecimalUtils;
 import br.com.catelani.santander.filetransfer.util.BooleanUtils;
 import br.com.catelani.santander.filetransfer.util.DateUtils;
+import br.com.catelani.santander.filetransfer.util.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
@@ -72,7 +73,7 @@ class DetalhePropostaFactoryImpl implements DetalhePropostaFactory {
   private RetornoFinanceiraDetalhe buildRetornoFinanceira(String[] informacoesAcordo) {
     final String retornoValidacaoFinanceira = informacoesAcordo[25];
     final Optional<String> listaCodigoErros = Optional.ofNullable(informacoesAcordo[26]);
-    final String numeroAcordoRCPGerado = informacoesAcordo[27];
+    final String numeroAcordoRCPGerado = getNumeroAcordoRPCGerado(informacoesAcordo[27]);
     final String linhaDigitalBoleto = informacoesAcordo[28];
 
     final List<CodigoRetornoErro> listaErros = listaCodigoErros.map(listaErroFactory::parseErros).orElse(Collections.emptyList());
@@ -85,6 +86,19 @@ class DetalhePropostaFactoryImpl implements DetalhePropostaFactory {
     retornoFinanceiraDetalhe.setLinhaDigitavelBoletoGerado(linhaDigitalBoleto);
 
     return retornoFinanceiraDetalhe;
+  }
+
+  /**
+   * Tratamento para os numeros de acordos gerados. O Banco envia {@code 0000000} quando não gera acordo ou em branco.
+   *
+   * @param numeroAcordo Numero de acordo fornecido pelo banco
+   * @return {@code null} caso o numero de acordo seja {@code null}, em branco ou {@code 0000000}.
+   */
+  private String getNumeroAcordoRPCGerado(String numeroAcordo) {
+    if (StringUtils.isNullOrEmpty(numeroAcordo))
+      return null;
+
+    return numeroAcordo.matches("0*") ? null : numeroAcordo;
   }
 
   @NotNull

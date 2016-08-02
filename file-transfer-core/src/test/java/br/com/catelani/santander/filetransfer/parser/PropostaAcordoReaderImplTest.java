@@ -239,7 +239,7 @@ public class PropostaAcordoReaderImplTest {
                                                                    CodigoRetornoErro.getByCodigoErro("342"),
                                                                    CodigoRetornoErro.getByCodigoErro("317"),
                                                                    CodigoRetornoErro.getByCodigoErro("340")));
-    assertThat(retornoFinanceira.getNumeroAcordoRPCGerado(), is("00000000000"));
+    assertThat(retornoFinanceira.getNumeroAcordoRPCGerado(), is(nullValue()));
     assertThat(retornoFinanceira.getLinhaDigitavelBoletoGerado(), is(nullValue()));
   }
 }
