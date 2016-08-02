@@ -2,6 +2,7 @@ package br.com.catelani.santander.filetransfer;
 
 import br.com.catelani.santander.filetransfer.domain.CabecalhoPropostaAcordo;
 import br.com.catelani.santander.filetransfer.domain.DadosPrestador;
+import br.com.catelani.santander.filetransfer.domain.DetalhePropostaAcordo;
 import br.com.catelani.santander.filetransfer.domain.PropostaAcordo;
 
 import java.util.ArrayList;
@@ -24,5 +25,15 @@ public class PropostaAcordoTestUtils {
     cabecalho.setDadosPrestador(dadosPrestador);
 
     return new PropostaAcordo(cabecalho, new ArrayList<>());
+  }
+
+  /**
+   * @return Um {@link DetalhePropostaAcordo} vazio.
+   */
+  public static DetalhePropostaAcordo createDetalhePropostaAcordo() {
+    final DetalhePropostaAcordo.DetalhesCompartilhados detalhesCompartilhados = new DetalhePropostaAcordo.DetalhesCompartilhados();
+    final DetalhePropostaAcordo detalhePropostaAcordo = new DetalhePropostaAcordo(detalhesCompartilhados);
+
+    return detalhePropostaAcordo;
   }
 }
