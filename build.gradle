@@ -13,6 +13,9 @@ allprojects {
 subprojects {
   apply plugin: 'java'
 
+  // configurando o compilador para UTF-8
+  compileJava.options.encoding = 'UTF-8'
+
   // nebula
   // TODO Adicionar os plugins de source e javadoc, precisa corrigir coisas com a documentação
 //  apply plugin: 'nebula.source-jar'
