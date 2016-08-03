@@ -20,7 +20,7 @@ subprojects {
     options.charSet = 'UTF-8'
   }
 
-  compileJava {
+  tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
   }
 
