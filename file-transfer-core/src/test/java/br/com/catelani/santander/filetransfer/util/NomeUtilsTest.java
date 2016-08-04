@@ -39,8 +39,21 @@ public class NomeUtilsTest {
     try {
       NomeUtils.getNomeArquivoPropostaAcordo(propostaAcordo);
       fail("Deveria ter lançado exception pois não tenho codigo de caixa postal");
-    } catch (IllegalStateException e) { }
+    } catch (Exception e) { }
 
+    dadosPrestador.setCaixaPostal("abcd");
+
+    try {
+      NomeUtils.getNomeArquivoPropostaAcordo(propostaAcordo);
+      fail("Deveria ter lançado exception pois não passou números");
+    } catch (Exception e) { }
+
+    dadosPrestador.setCaixaPostal("-1");
+
+    try {
+      NomeUtils.getNomeArquivoPropostaAcordo(propostaAcordo);
+      fail("Deveria ter lançado exception pois passou número negativo, quem diabos faz isso???");
+    } catch (Exception e) { }
 
     // dados corretos agora
     dadosPrestador.setCaixaPostal("1234");
@@ -51,7 +64,6 @@ public class NomeUtilsTest {
 
   @Test
   public void getTipoRetornoFinanceiraPeloNomeArquivo() throws Exception {
-
     try {
       NomeUtils.getTipoRetornoFinanceiraPeloNomeArquivo("ASC123");
       fail("Deveria ter lançado exception, pois o nome é inválido");

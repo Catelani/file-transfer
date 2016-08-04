@@ -29,8 +29,7 @@ public class NomeUtils {
    * @param proposta Proposta com as informações para gerar o nome do arquivo.
    * @return O nome do arquio de acordo com as regras do banco.
    * @throws NullPointerException  se a {@code proposta}, o {@link PropostaAcordo#getCabecalho()} ou {@link CabecalhoPropostaAcordo#getDadosPrestador()} forem nulos.
-   * @throws IllegalStateException se o {@link DadosPrestador#getCaixaPostal()} for nulo ou vazio ou não seguir as regras do banco, que deve ser 4 digitos diferentes de 0
-   *                               ou se {@link CabecalhoPropostaAcordo#getTipoInterface()} for diferente de {@link TipoInterface#PROPOSTA_DE_ACORDO}.
+   * @throws IllegalStateException se o {@link DadosPrestador#getCaixaPostal()} for nulo ou vazio ou não seguir as regras do banco, que deve ser 4 digitos diferentes de 0.
    */
   @NotNull
   @Contract(value = "null -> fail;", pure = true)
@@ -39,20 +38,28 @@ public class NomeUtils {
     Objects.requireNonNull(proposta.getCabecalho(), "O Cabeçalho da proposta não pode ser nulo!");
     Objects.requireNonNull(proposta.getCabecalho().getDadosPrestador(), "Os dados do prestador não podem ser nulos!");
 
-    final DadosPrestador dadosPrestador = proposta.getCabecalho().getDadosPrestador();
+    final String caixaPostal = proposta.getCabecalho().getDadosPrestador().getCaixaPostal();
+    final TipoInterface tipoInterface = proposta.getCabecalho().getTipoInterface();
 
-    final String caixaPostal = dadosPrestador.getCaixaPostal();
+    return getNomeArquivoPropostaAcordo(tipoInterface, caixaPostal);
+  }
+
+  /**
+   * Gera um nome de arquio de acordo com as informações de {@code tipoInterface}  e {@code caixaPostal} do prestador, seguindo as regras estipuladas pelo banco.
+   *
+   * @return O nome do arquio de acordo com as regras do banco.
+   * @throws NullPointerException  se o {@code tipoInterface} for nulo.
+   * @throws IllegalStateException se o {@code caixaPostal} for nulo ou vazio ou não seguir as regras do banco, que deve ser 4 digitos diferentes de 0.
+   */
+  @Contract("null, _ -> fail; _, null -> fail;")
+  public static String getNomeArquivoPropostaAcordo(@NotNull TipoInterface tipoInterface, @NotNull String caixaPostal) {
+    Objects.requireNonNull(tipoInterface, "O tipo de interface da proposta está nulo!");
 
     if (isNullOrEmpty(caixaPostal))
       throw new IllegalStateException("A proposta está sem a Caixa Postal!");
 
     if (!caixaPostal.matches("\\d{4}") || Long.parseLong(caixaPostal) <= 0)
       throw new IllegalStateException("O código de caixa posta [" + caixaPostal + "]não está nos padrões do banco, ele deve ser 4 digitos númericos diferentes de 0.");
-
-    final TipoInterface tipoInterface = proposta.getCabecalho().getTipoInterface();
-
-    if (tipoInterface == null)
-      throw new IllegalStateException("O tipo de interface da proposta está nulo!");
 
     return String.format("ESC%s%s.DAT", tipoInterface, caixaPostal);
   }
