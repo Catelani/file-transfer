@@ -51,8 +51,10 @@ public class ValidadorDataHoraRemessaPrestadorHandler extends ValidadorPropostaA
         log.warn("Erro ao validar a data", erro);
         return Optional.of(erro);
       }
+    } else {
+      // Não será avaliado pois não tera como validar nada, ja que o banco não retorna nenhuma informação util quando for o terceiro tipo (PROTOCOLO_RECEBIMENTO)
+      log.debug("Proposta com Tipo de Interface [{}] não avaliada pelo Validador de DatahoraRemessaPrestador", tipoInterface);
     }
-
 
     return super.isValid(propostaAcordo);
   }
