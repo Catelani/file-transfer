@@ -26,6 +26,7 @@ public interface PropostaAcordoReader {
    * @param is {@link InputStream} do arquivo file transfer do banco.
    * @return Um {@link PropostaAcordo} baseado nos dados do arquivo.
    * @throws IllegalStateException Se não conseguir ler nada da Stream de Entrada {@code is}
+   * @throws IOException Caso der algum problema na leitura da Stream de Entrada {@code is}
    */
   PropostaAcordo parse(@NotNull InputStream is) throws IOException;
 
@@ -37,6 +38,7 @@ public interface PropostaAcordoReader {
    * @param charset Charset a ser utilizado na leitura do arquivo, caso nenhum seja informado o padrão é {@link StandardCharsets#UTF_8}
    * @return Um {@link PropostaAcordo} baseado nos dados do arquivo.
    * @throws IllegalStateException Se não conseguir ler nada da Stream de Entrada {@code is}
+   * @throws IOException Caso der algum problema na leitura da Stream de Entrada {@code is}
    */
   PropostaAcordo parse(@NotNull InputStream is, @Nullable Charset charset) throws IOException;
 }
