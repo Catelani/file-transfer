@@ -8,21 +8,19 @@ plugins {
 
 allprojects {
   apply plugin: 'nebula.nebula-release'
+
+  // configurações de encoding para CI
+  tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+  }
+
+  tasks.withType(Test) {
+    systemProperty "file.encoding", "UTF-8"
+  }
 }
 
 subprojects {
   apply plugin: 'java'
-
-  // configurando o compilador para UTF-8
-  compileJava.options.encoding = 'UTF-8'
-
-  javadoc {
-    options.charSet = 'UTF-8'
-  }
-
-  tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
-  }
 
   // nebula
   // TODO Adicionar os plugins de source e javadoc, precisa corrigir coisas com a documentação
@@ -36,7 +34,6 @@ subprojects {
   // QA plugins
   apply plugin: 'pmd'
   apply plugin: 'findbugs'
-  apply plugin: 'jacoco'
   apply plugin: 'jdepend'
   apply plugin: 'build-dashboard'
 
@@ -129,21 +126,10 @@ subprojects {
     dependsOn += ['jdependReport']
   }
 
-  jacoco {
-    toolVersion = '0.7.7.201606060606'
-  }
-
-  jacocoTestReport {
-    reports {
-      xml.enabled false
-      csv.enabled false
-    }
-  }
-
   jar {
     manifest {
       attributes('Implementation-Title': project.name,
-                 'Implementation-Version': project.version,
+                 'Implementation-Version': "${project.version}",
                  'Implementation-Author': 'Catelani')
     }
   }
@@ -151,15 +137,4 @@ subprojects {
 
 task wrapper(type: Wrapper) {
   gradleVersion = '2.14.1'
-}
-
-task importJacocoTestReportOnTeamCity << {
-  logger.quiet("Notificando TeamCity para importar informações do JaCoCo")
-
-  def projetos = ['file-transfer-cli', 'file-transfer-core']
-  def dataPath = projetos.collect { "${project(it).buildDir}/jacoco/test.exec" }.join(' ')
-  def jacocoClassPath = projetos.collect { "+:${project(it).buildDir}/classes/main/**" }.join(' ')
-
-  logger.quiet(
-      "##teamcity[jacocoReport dataPath='${dataPath}' includes='br.com.catelani.santander.filetransfer.*' classpath='${jacocoClassPath}' ]")
 }
