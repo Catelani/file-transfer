@@ -47,25 +47,8 @@ subprojects {
   }
 
   dependencies {
-    // logs
-    compile 'org.slf4j:slf4j-api'
-    provided group: 'ch.qos.logback', name: 'logback-classic', optional // log plugavel
-
-    // csv parser
-    compile group: 'com.univocity', name: 'univocity-parsers'
-
     // para melhorar a interação com o IntelliJ
     provided 'org.jetbrains:annotations'
-
-    // google guice
-    compile 'com.google.inject:guice'
-    testCompile group: 'com.google.inject.extensions', name: 'guice-testlib'
-
-    // Para gerar ascii tables
-    compile 'de.vandermeer:asciitable', optional
-
-    // lombok
-    provided group: 'org.projectlombok', name: 'lombok'
 
     // tests
     testCompile group: 'junit', name: 'junit'

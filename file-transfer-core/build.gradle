@@ -3,6 +3,23 @@ plugins {
 }
 
 dependencies {
+  // logs
+  compile 'org.slf4j:slf4j-api'
+  provided group: 'ch.qos.logback', name: 'logback-classic', optional // log plugavel
+
+  // csv parser
+  compile group: 'com.univocity', name: 'univocity-parsers'
+
+  // Para gerar ascii tables
+  compile 'de.vandermeer:asciitable', optional
+
+  // google guice
+  compile 'com.google.inject:guice'
+  testCompile group: 'com.google.inject.extensions', name: 'guice-testlib'
+
+  // lombok
+  provided group: 'org.projectlombok', name: 'lombok'
+
   // jmh
   jmh 'org.openjdk.jmh:jmh-generator-annprocess:1.12'
 }
