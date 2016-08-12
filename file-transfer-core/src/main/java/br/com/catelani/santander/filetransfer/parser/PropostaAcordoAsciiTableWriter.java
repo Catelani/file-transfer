@@ -13,7 +13,9 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Comparator;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -46,19 +48,19 @@ class PropostaAcordoAsciiTableWriter implements PropostaAcordoWriter {
       os.write(QUEBRA_LINHA);
 
       writeDetalhes(propostaAcordo, os);
+
+      // duas quebras de linha pra dar espaço entre os detalhes e a lista de erros
+      os.write(QUEBRA_LINHA);
+      os.write(QUEBRA_LINHA);
+
+      // escrevo a lista de erros caso houver.
+      writeErros(propostaAcordo, os);
     } catch (IOException e) {
       log.error("Erro gerando Ascii Table da Proposta de Acordo", e);
       throw e;
     }
   }
 
-  private V2_AsciiTableRenderer getTableRenderer() {
-    V2_AsciiTableRenderer tableRenderer = new V2_AsciiTableRenderer();
-    tableRenderer.setWidth(new WidthLongestWordMinCol(20));
-    tableRenderer.setTheme(V2_E_TableThemes.PLAIN_7BIT.get());
-
-    return tableRenderer;
-  }
 
   private void writeCabecalho(PropostaAcordo propostaAcordo, OutputStream outputStream) throws IOException {
     log.debug("Escrevendo o cabeçalho");
@@ -255,6 +257,47 @@ class PropostaAcordoAsciiTableWriter implements PropostaAcordoWriter {
       null,
       "Retorno do Banco",
       "Num. Sequencia"};
+  }
+
+  private void writeErros(@NotNull PropostaAcordo propostaAcordo, @NotNull OutputStream os) throws IOException {
+    log.debug("Escrevendo erros");
+    // Pego a lista de erros unicos
+    final Set<CodigoRetornoErro> listaErros = propostaAcordo.getDetalhes()
+                                                            .stream()
+                                                            .flatMap(d -> d.getRetornoFinanceiraDetalhe().getCodigoRetornoErros().stream())
+                                                            .collect(Collectors.toSet());
+
+    if (!listaErros.isEmpty()) {
+      final V2_AsciiTable table = new V2_AsciiTable();
+
+      table.addRule();
+      table.addRow(null, "Erros e seus Códigos")
+           .setAlignment(new char[]{'c', 'c'});
+      table.addRule();
+
+      table.addRow("Código Erro", "Descrição");
+      table.addRule();
+
+      listaErros.stream()
+                .sorted(Comparator.comparing(c -> Long.parseLong(c.toString())))
+                .map(c -> new Object[]{c.toString(), c.name()})
+                .forEach(row -> {
+                  table.addRow(row);
+                  table.addRule();
+                });
+
+      final V2_AsciiTableRenderer tableRenderer = getTableRenderer();
+      final RenderedTable renderedTable = tableRenderer.render(table);
+      os.write(renderedTable.toString().getBytes(StandardCharsets.UTF_8));
+    }
+  }
+
+  private V2_AsciiTableRenderer getTableRenderer() {
+    V2_AsciiTableRenderer tableRenderer = new V2_AsciiTableRenderer();
+    tableRenderer.setWidth(new WidthLongestWordMinCol(20));
+    tableRenderer.setTheme(V2_E_TableThemes.PLAIN_7BIT.get());
+
+    return tableRenderer;
   }
 
   private Object[] getCabecalho() {
