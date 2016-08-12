@@ -59,18 +59,27 @@ public class CliMain {
                                     .longOpt("ascii-table")
                                     .build();
 
-    final Option ajuda = Option.builder("a")
+    final Option arquivoSaida = Option.builder("o")
+                                      .desc("Direcionar saida do processamento para um arquivo.")
+                                      .longOpt("option")
+                                      .argName("Arquivo Saida")
+                                      .numberOfArgs(1)
+                                      .optionalArg(true)
+                                      .build();
+
+    final Option ajuda = Option.builder()
                                .desc("Imprime uma ajuda.")
-                               .longOpt("ajuda")
+                               .longOpt("help")
                                .build();
 
     final Option validar = Option.builder("v")
-                                 .longOpt("validar")
+                                 .longOpt("validate")
                                  .desc("Valida uma proposta de acordo")
                                  .build();
 
     final Options options = new Options();
     options.addOption(asciiTable);
+    options.addOption(arquivoSaida);
     options.addOption(validar);
     options.addOption(ajuda);
 

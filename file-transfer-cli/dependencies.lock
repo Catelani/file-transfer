@@ -174,16 +174,6 @@
             "locked": "3.0.1"
         }
     },
-    "jacocoAgent": {
-        "org.jacoco:org.jacoco.agent": {
-            "locked": "0.7.7.201606060606"
-        }
-    },
-    "jacocoAnt": {
-        "org.jacoco:org.jacoco.ant": {
-            "locked": "0.7.7.201606060606"
-        }
-    },
     "jdepend": {
         "jdepend:jdepend": {
             "locked": "2.9.1"

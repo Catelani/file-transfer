@@ -1,10 +1,7 @@
 package br.com.catelani.santander.filetransfer.cli.commands;
 
 import br.com.catelani.santander.filetransfer.cli.CliCommand;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.Options;
+import org.apache.commons.cli.*;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -30,8 +27,8 @@ public class AjudaCliCommandHandlerTest {
 
   @Test
   public void testComFlagajuda() throws Exception {
-    final Options opcoesDisponiveis = new Options().addOption("a", "Ajuda");
-    final String[] args = {"-a"};
+    final Options opcoesDisponiveis = new Options().addOption(Option.builder().longOpt("help").build());
+    final String[] args = {"--help"};
 
     CommandLineParser parser = new DefaultParser();
     final CommandLine cli = parser.parse(opcoesDisponiveis, args);
@@ -40,7 +37,7 @@ public class AjudaCliCommandHandlerTest {
     commandHandler.handleCliCommand(cliCommand);
 
     assertTrue(cliCommand.isHandled());
-    assertThat(systemOutRule.getLog(), containsString("java -jar file-transfer-cli.jar"));
+    assertThat(systemOutRule.getLog(), containsString("java -jar file-transfer-cli.jar [--help] -[hv] <Caminho Proposta Acordo> [-o] <Caminho de Saida>"));
   }
 
   @Test

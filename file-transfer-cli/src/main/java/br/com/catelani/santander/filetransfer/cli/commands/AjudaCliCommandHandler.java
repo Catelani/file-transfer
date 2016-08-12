@@ -22,7 +22,7 @@ public class AjudaCliCommandHandler extends AbstractCliCommandHandler {
    * @return {@code true} caso precise, {@code false} do contrário.
    */
   private static boolean precisaMostrarAjuda(String[] args, CommandLine cli) {
-    return args.length == 0 || cli.getOptions().length == 0 || cli.hasOption("a");
+    return args.length == 0 || cli.getOptions().length == 0 || cli.hasOption("help");
   }
 
   @Override
@@ -32,10 +32,10 @@ public class AjudaCliCommandHandler extends AbstractCliCommandHandler {
       log.debug("Precisa mostrar a ajuda");
 
       final HelpFormatter helpFormatter = new HelpFormatter();
-      helpFormatter.printHelp("java -jar file-transfer-cli.jar -[hva] <Caminho Proposta Acordo>",
+      helpFormatter.printHelp("java -jar file-transfer-cli.jar [--help] -[hv] <Caminho Proposta Acordo> [-o] <Caminho de Saida>",
                               "\nOpções:",
                               cliCommand.getOpcoesDisponiveis(),
-                              "\nDesenvolvido por Kennedy Oliveira <kennedy.desenvolvimento@catelani.com.br>");
+                              "\nDesenvolvido por Kennedy Oliveira <kennedy.desenvolvimento@catelani.com.br>", true);
 
       cliCommand.markHandled();
     } else {

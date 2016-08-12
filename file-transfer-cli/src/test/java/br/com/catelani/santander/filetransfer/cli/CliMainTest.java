@@ -31,7 +31,7 @@ public class CliMainTest {
 
   @Test
   public void testOpcaoAjuda() throws Exception {
-    CliMain.main(new String[]{"--ajuda"});
+    CliMain.main(new String[]{"--help"});
 
     assertThat(systemOutRule.getLog(), containsString("usage: java -jar file-transfer-cli.jar"));
 
