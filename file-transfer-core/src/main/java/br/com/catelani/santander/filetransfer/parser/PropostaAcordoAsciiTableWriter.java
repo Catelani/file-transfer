@@ -61,44 +61,6 @@ class PropostaAcordoAsciiTableWriter implements PropostaAcordoWriter {
     }
   }
 
-  private void writeErros(@NotNull PropostaAcordo propostaAcordo, @NotNull OutputStream os) throws IOException {
-    log.debug("Escrevendo erros");
-    // Pego a lista de erros unicos
-    final Set<CodigoRetornoErro> listaErros = propostaAcordo.getDetalhes()
-                                                            .stream()
-                                                            .flatMap(d -> d.getRetornoFinanceiraDetalhe().getCodigoRetornoErros().stream())
-                                                            .collect(Collectors.toSet());
-
-    if (!listaErros.isEmpty()) {
-      final V2_AsciiTable table = new V2_AsciiTable();
-
-      table.addRule();
-      table.addRow(null, "Erros e seus Códigos").setAlignment(new char[]{'c', 'c'});
-      table.addRule();
-      table.addRow("Código Erro", "Descrição");
-      table.addRule();
-
-      listaErros.stream()
-                .sorted(Comparator.comparing(c -> Long.parseLong(c.toString())))
-                .map(c -> new Object[]{c.toString(), c.name()})
-                .forEach(row -> {
-                  table.addRow(row);
-                  table.addRule();
-                });
-
-      final V2_AsciiTableRenderer tableRenderer = getTableRenderer();
-      final RenderedTable renderedTable = tableRenderer.render(table);
-      os.write(renderedTable.toString().getBytes(StandardCharsets.UTF_8));
-    }
-  }
-
-  private V2_AsciiTableRenderer getTableRenderer() {
-    V2_AsciiTableRenderer tableRenderer = new V2_AsciiTableRenderer();
-    tableRenderer.setWidth(new WidthLongestWordMinCol(20));
-    tableRenderer.setTheme(V2_E_TableThemes.PLAIN_7BIT.get());
-
-    return tableRenderer;
-  }
 
   private void writeCabecalho(PropostaAcordo propostaAcordo, OutputStream outputStream) throws IOException {
     log.debug("Escrevendo o cabeçalho");
@@ -295,6 +257,47 @@ class PropostaAcordoAsciiTableWriter implements PropostaAcordoWriter {
       null,
       "Retorno do Banco",
       "Num. Sequencia"};
+  }
+
+  private void writeErros(@NotNull PropostaAcordo propostaAcordo, @NotNull OutputStream os) throws IOException {
+    log.debug("Escrevendo erros");
+    // Pego a lista de erros unicos
+    final Set<CodigoRetornoErro> listaErros = propostaAcordo.getDetalhes()
+                                                            .stream()
+                                                            .flatMap(d -> d.getRetornoFinanceiraDetalhe().getCodigoRetornoErros().stream())
+                                                            .collect(Collectors.toSet());
+
+    if (!listaErros.isEmpty()) {
+      final V2_AsciiTable table = new V2_AsciiTable();
+
+      table.addRule();
+      table.addRow(null, "Erros e seus Códigos")
+           .setAlignment(new char[]{'c', 'c'});
+      table.addRule();
+
+      table.addRow("Código Erro", "Descrição");
+      table.addRule();
+
+      listaErros.stream()
+                .sorted(Comparator.comparing(c -> Long.parseLong(c.toString())))
+                .map(c -> new Object[]{c.toString(), c.name()})
+                .forEach(row -> {
+                  table.addRow(row);
+                  table.addRule();
+                });
+
+      final V2_AsciiTableRenderer tableRenderer = getTableRenderer();
+      final RenderedTable renderedTable = tableRenderer.render(table);
+      os.write(renderedTable.toString().getBytes(StandardCharsets.UTF_8));
+    }
+  }
+
+  private V2_AsciiTableRenderer getTableRenderer() {
+    V2_AsciiTableRenderer tableRenderer = new V2_AsciiTableRenderer();
+    tableRenderer.setWidth(new WidthLongestWordMinCol(20));
+    tableRenderer.setTheme(V2_E_TableThemes.PLAIN_7BIT.get());
+
+    return tableRenderer;
   }
 
   private Object[] getCabecalho() {
