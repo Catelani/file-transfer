@@ -7,8 +7,14 @@ configurations {
 dependencies {
   compile project(':file-transfer-core')
 
+  // logs
+  compile 'org.slf4j:slf4j-api'
+
   // para suporte a linha de comando
   compile group: 'commons-cli', name: 'commons-cli'
+
+  // lombok
+  provided group: 'org.projectlombok', name: 'lombok'
 
   // sem logs para o cli
   fatJar 'org.slf4j:slf4j-nop:1.7.20'

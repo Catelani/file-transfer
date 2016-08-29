@@ -1,13 +1,29 @@
 plugins {
-  id 'me.champeau.gradle.jmh' version '0.3.0'
+  id 'me.champeau.gradle.jmh' version '0.3.1'
 }
 
 dependencies {
+  // logs
+  compile 'org.slf4j:slf4j-api'
+
+  // csv parser
+  compile group: 'com.univocity', name: 'univocity-parsers'
+
+  // Para gerar ascii tables
+  compile 'de.vandermeer:asciitable', optional
+
+  // google guice
+  compile 'com.google.inject:guice'
+  testCompile group: 'com.google.inject.extensions', name: 'guice-testlib'
+
+  // lombok
+  provided group: 'org.projectlombok', name: 'lombok'
+
   // jmh
-  jmh 'org.openjdk.jmh:jmh-generator-annprocess:1.12'
+  jmh 'org.openjdk.jmh:jmh-generator-annprocess:1.13'
 }
 
 jmh {
-  jmhVersion = '1.12'
+  jmhVersion = '1.13'
   includeTests = false
 }

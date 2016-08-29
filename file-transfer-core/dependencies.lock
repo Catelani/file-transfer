@@ -1,13 +1,10 @@
 {
     "compile": {
-        "ch.qos.logback:logback-classic": {
-            "locked": "1.1.7"
-        },
         "com.google.inject:guice": {
-            "locked": "4.0-beta5"
+            "locked": "4.1.0"
         },
         "com.univocity:univocity-parsers": {
-            "locked": "2.2.0"
+            "locked": "2.2.1"
         },
         "de.vandermeer:asciitable": {
             "locked": "0.2.5"
@@ -19,18 +16,15 @@
             "locked": "1.16.10"
         },
         "org.slf4j:slf4j-api": {
-            "locked": "1.7.20"
+            "locked": "1.7.21"
         }
     },
     "compileClasspath": {
-        "ch.qos.logback:logback-classic": {
-            "locked": "1.1.7"
-        },
         "com.google.inject:guice": {
-            "locked": "4.0-beta5"
+            "locked": "4.1.0"
         },
         "com.univocity:univocity-parsers": {
-            "locked": "2.2.0"
+            "locked": "2.2.1"
         },
         "de.vandermeer:asciitable": {
             "locked": "0.2.5"
@@ -42,18 +36,15 @@
             "locked": "1.16.10"
         },
         "org.slf4j:slf4j-api": {
-            "locked": "1.7.20"
+            "locked": "1.7.21"
         }
     },
     "compileOnly": {
-        "ch.qos.logback:logback-classic": {
-            "locked": "1.1.7"
-        },
         "com.google.inject:guice": {
-            "locked": "4.0-beta5"
+            "locked": "4.1.0"
         },
         "com.univocity:univocity-parsers": {
-            "locked": "2.2.0"
+            "locked": "2.2.1"
         },
         "de.vandermeer:asciitable": {
             "locked": "0.2.5"
@@ -65,18 +56,15 @@
             "locked": "1.16.10"
         },
         "org.slf4j:slf4j-api": {
-            "locked": "1.7.20"
+            "locked": "1.7.21"
         }
     },
     "default": {
-        "ch.qos.logback:logback-classic": {
-            "project": true
-        },
         "com.google.inject:guice": {
-            "locked": "4.0-beta5"
+            "locked": "4.1.0"
         },
         "com.univocity:univocity-parsers": {
-            "locked": "2.2.0"
+            "locked": "2.2.1"
         },
         "de.vandermeer:asciitable": {
             "locked": "0.2.5"
@@ -88,22 +76,12 @@
             "project": true
         },
         "org.slf4j:slf4j-api": {
-            "locked": "1.7.20"
+            "locked": "1.7.21"
         }
     },
     "findbugs": {
         "com.google.code.findbugs:findbugs": {
             "locked": "3.0.1"
-        }
-    },
-    "jacocoAgent": {
-        "org.jacoco:org.jacoco.agent": {
-            "locked": "0.7.7.201606060606"
-        }
-    },
-    "jacocoAnt": {
-        "org.jacoco:org.jacoco.ant": {
-            "locked": "0.7.7.201606060606"
         }
     },
     "jdepend": {
@@ -116,14 +94,14 @@
     },
     "jmh": {
         "org.openjdk.jmh:jmh-core": {
-            "locked": "1.12"
+            "locked": "1.13"
         },
         "org.openjdk.jmh:jmh-generator-annprocess": {
-            "locked": "1.12",
-            "requested": "1.12"
+            "locked": "1.13",
+            "requested": "1.13"
         },
         "org.openjdk.jmh:jmh-generator-bytecode": {
-            "locked": "1.12"
+            "locked": "1.13"
         }
     },
     "pmd": {
@@ -132,9 +110,6 @@
         }
     },
     "provided": {
-        "ch.qos.logback:logback-classic": {
-            "locked": "1.1.7"
-        },
         "org.jetbrains:annotations": {
             "locked": "15.0"
         },
@@ -143,14 +118,11 @@
         }
     },
     "runtime": {
-        "ch.qos.logback:logback-classic": {
-            "locked": "1.1.7"
-        },
         "com.google.inject:guice": {
-            "locked": "4.0-beta5"
+            "locked": "4.1.0"
         },
         "com.univocity:univocity-parsers": {
-            "locked": "2.2.0"
+            "locked": "2.2.1"
         },
         "de.vandermeer:asciitable": {
             "locked": "0.2.5"
@@ -162,24 +134,21 @@
             "locked": "1.16.10"
         },
         "org.slf4j:slf4j-api": {
-            "locked": "1.7.20"
+            "locked": "1.7.21"
         }
     },
     "testCompile": {
-        "ch.qos.logback:logback-classic": {
-            "locked": "1.1.7"
-        },
         "com.github.stefanbirkner:system-rules": {
             "locked": "1.16.0"
         },
         "com.google.inject.extensions:guice-testlib": {
-            "locked": "4.0-beta5"
+            "locked": "4.1.0"
         },
         "com.google.inject:guice": {
-            "locked": "4.0-beta5"
+            "locked": "4.1.0"
         },
         "com.univocity:univocity-parsers": {
-            "locked": "2.2.0"
+            "locked": "2.2.1"
         },
         "de.vandermeer:asciitable": {
             "locked": "0.2.5"
@@ -197,24 +166,21 @@
             "locked": "1.16.10"
         },
         "org.slf4j:slf4j-api": {
-            "locked": "1.7.20"
+            "locked": "1.7.21"
         }
     },
     "testCompileClasspath": {
-        "ch.qos.logback:logback-classic": {
-            "locked": "1.1.7"
-        },
         "com.github.stefanbirkner:system-rules": {
             "locked": "1.16.0"
         },
         "com.google.inject.extensions:guice-testlib": {
-            "locked": "4.0-beta5"
+            "locked": "4.1.0"
         },
         "com.google.inject:guice": {
-            "locked": "4.0-beta5"
+            "locked": "4.1.0"
         },
         "com.univocity:univocity-parsers": {
-            "locked": "2.2.0"
+            "locked": "2.2.1"
         },
         "de.vandermeer:asciitable": {
             "locked": "0.2.5"
@@ -232,24 +198,21 @@
             "locked": "1.16.10"
         },
         "org.slf4j:slf4j-api": {
-            "locked": "1.7.20"
+            "locked": "1.7.21"
         }
     },
     "testCompileOnly": {
-        "ch.qos.logback:logback-classic": {
-            "locked": "1.1.7"
-        },
         "com.github.stefanbirkner:system-rules": {
             "locked": "1.16.0"
         },
         "com.google.inject.extensions:guice-testlib": {
-            "locked": "4.0-beta5"
+            "locked": "4.1.0"
         },
         "com.google.inject:guice": {
-            "locked": "4.0-beta5"
+            "locked": "4.1.0"
         },
         "com.univocity:univocity-parsers": {
-            "locked": "2.2.0"
+            "locked": "2.2.1"
         },
         "de.vandermeer:asciitable": {
             "locked": "0.2.5"
@@ -267,24 +230,21 @@
             "locked": "1.16.10"
         },
         "org.slf4j:slf4j-api": {
-            "locked": "1.7.20"
+            "locked": "1.7.21"
         }
     },
     "testRuntime": {
-        "ch.qos.logback:logback-classic": {
-            "locked": "1.1.7"
-        },
         "com.github.stefanbirkner:system-rules": {
             "locked": "1.16.0"
         },
         "com.google.inject.extensions:guice-testlib": {
-            "locked": "4.0-beta5"
+            "locked": "4.1.0"
         },
         "com.google.inject:guice": {
-            "locked": "4.0-beta5"
+            "locked": "4.1.0"
         },
         "com.univocity:univocity-parsers": {
-            "locked": "2.2.0"
+            "locked": "2.2.1"
         },
         "de.vandermeer:asciitable": {
             "locked": "0.2.5"
@@ -302,7 +262,7 @@
             "locked": "1.16.10"
         },
         "org.slf4j:slf4j-api": {
-            "locked": "1.7.20"
+            "locked": "1.7.21"
         }
     }
 }
