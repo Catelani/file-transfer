@@ -1,6 +1,7 @@
 package br.com.catelani.santander.filetransfer.cli.commands;
 
 import br.com.catelani.santander.filetransfer.cli.CliCommand;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -23,6 +24,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * @author Kennedy Oliveira
  */
+@Slf4j
 public class PrintAsciiTableCliCommandHandlerTest {
 
   @Rule
@@ -100,7 +102,9 @@ public class PrintAsciiTableCliCommandHandlerTest {
     tempDir.create();
     final File arquivoTemporario = tempDir.newFile();
 
-    Files.copy(ClassLoader.getSystemResourceAsStream("exemplos/MULTIPLOS_PROPOSTA_ACORDO.dat"), arquivoTemporario.toPath(), REPLACE_EXISTING);
+    log.debug("Arquivo temporario => {}", arquivoTemporario.getAbsolutePath());
+
+    Files.copy(ClassLoader.getSystemResourceAsStream("exemplos/MULTIPLOS_PROPOSTA_ACORDO.DAT"), arquivoTemporario.toPath(), REPLACE_EXISTING);
 
     final Options opcoesDisponiveis = new Options().addOption("h", "Print Ascii Table");
     final String[] args = {"-h", arquivoTemporario.getAbsolutePath()};
