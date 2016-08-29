@@ -93,6 +93,31 @@ public class PrintAsciiTableCliCommandHandlerTest {
 
     assertTrue(cliCommand.isHandled());
     assertThat(systemOutRule.getLog(), containsString("O arquivo [" + arquivoEntrada + "] não existe"));
+  }
 
+  @Test
+  public void testVariasPropostaAcordoPorArquivo() throws Exception {
+    tempDir.create();
+    final File arquivoTemporario = tempDir.newFile();
+
+    Files.copy(ClassLoader.getSystemResourceAsStream("exemplos/MULTIPLOS_PROPOSTA_ACORDO.dat"), arquivoTemporario.toPath(), REPLACE_EXISTING);
+
+    final Options opcoesDisponiveis = new Options().addOption("h", "Print Ascii Table");
+    final String[] args = {"-h", arquivoTemporario.getAbsolutePath()};
+
+    CommandLineParser parser = new DefaultParser();
+    final CommandLine cli = parser.parse(opcoesDisponiveis, args);
+
+    final CliCommand cliCommand = new CliCommand(args, opcoesDisponiveis, cli);
+    commandHandler.handleCliCommand(cliCommand);
+
+    assertTrue(cliCommand.isHandled());
+    assertThat(systemOutRule.getLog(), allOf(containsString("Dados do Contrato"),
+                                             containsString("Data Vencimento"),
+                                             containsString("GCA Contrato"),
+                                             containsString("Valor Parcelas"),
+                                             containsString("GCA Dispensado"),
+                                             containsString("Tipo de Interface"),
+                                             containsString("Num. Caixa Postal")));
   }
 }
