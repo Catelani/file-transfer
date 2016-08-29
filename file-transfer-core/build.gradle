@@ -5,7 +5,6 @@ plugins {
 dependencies {
   // logs
   compile 'org.slf4j:slf4j-api'
-  provided group: 'ch.qos.logback', name: 'logback-classic', optional // log plugavel
 
   // csv parser
   compile group: 'com.univocity', name: 'univocity-parsers'

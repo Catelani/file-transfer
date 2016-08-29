@@ -9,7 +9,6 @@ dependencies {
 
   // logs
   compile 'org.slf4j:slf4j-api'
-  provided group: 'ch.qos.logback', name: 'logback-classic', optional // log plugavel
 
   // para suporte a linha de comando
   compile group: 'commons-cli', name: 'commons-cli'

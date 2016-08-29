@@ -1,8 +1,5 @@
 {
     "compile": {
-        "ch.qos.logback:logback-classic": {
-            "locked": "1.1.7"
-        },
         "com.google.inject:guice": {
             "locked": "4.1.0"
         },
@@ -19,13 +16,10 @@
             "locked": "1.16.10"
         },
         "org.slf4j:slf4j-api": {
-            "locked": "1.7.20"
+            "locked": "1.7.21"
         }
     },
     "compileClasspath": {
-        "ch.qos.logback:logback-classic": {
-            "locked": "1.1.7"
-        },
         "com.google.inject:guice": {
             "locked": "4.1.0"
         },
@@ -42,13 +36,10 @@
             "locked": "1.16.10"
         },
         "org.slf4j:slf4j-api": {
-            "locked": "1.7.20"
+            "locked": "1.7.21"
         }
     },
     "compileOnly": {
-        "ch.qos.logback:logback-classic": {
-            "locked": "1.1.7"
-        },
         "com.google.inject:guice": {
             "locked": "4.1.0"
         },
@@ -65,13 +56,10 @@
             "locked": "1.16.10"
         },
         "org.slf4j:slf4j-api": {
-            "locked": "1.7.20"
+            "locked": "1.7.21"
         }
     },
     "default": {
-        "ch.qos.logback:logback-classic": {
-            "project": true
-        },
         "com.google.inject:guice": {
             "locked": "4.1.0"
         },
@@ -88,7 +76,7 @@
             "project": true
         },
         "org.slf4j:slf4j-api": {
-            "locked": "1.7.20"
+            "locked": "1.7.21"
         }
     },
     "findbugs": {
@@ -122,9 +110,6 @@
         }
     },
     "provided": {
-        "ch.qos.logback:logback-classic": {
-            "locked": "1.1.7"
-        },
         "org.jetbrains:annotations": {
             "locked": "15.0"
         },
@@ -133,9 +118,6 @@
         }
     },
     "runtime": {
-        "ch.qos.logback:logback-classic": {
-            "locked": "1.1.7"
-        },
         "com.google.inject:guice": {
             "locked": "4.1.0"
         },
@@ -152,13 +134,10 @@
             "locked": "1.16.10"
         },
         "org.slf4j:slf4j-api": {
-            "locked": "1.7.20"
+            "locked": "1.7.21"
         }
     },
     "testCompile": {
-        "ch.qos.logback:logback-classic": {
-            "locked": "1.1.7"
-        },
         "com.github.stefanbirkner:system-rules": {
             "locked": "1.16.0"
         },
@@ -187,13 +166,10 @@
             "locked": "1.16.10"
         },
         "org.slf4j:slf4j-api": {
-            "locked": "1.7.20"
+            "locked": "1.7.21"
         }
     },
     "testCompileClasspath": {
-        "ch.qos.logback:logback-classic": {
-            "locked": "1.1.7"
-        },
         "com.github.stefanbirkner:system-rules": {
             "locked": "1.16.0"
         },
@@ -222,13 +198,10 @@
             "locked": "1.16.10"
         },
         "org.slf4j:slf4j-api": {
-            "locked": "1.7.20"
+            "locked": "1.7.21"
         }
     },
     "testCompileOnly": {
-        "ch.qos.logback:logback-classic": {
-            "locked": "1.1.7"
-        },
         "com.github.stefanbirkner:system-rules": {
             "locked": "1.16.0"
         },
@@ -257,13 +230,10 @@
             "locked": "1.16.10"
         },
         "org.slf4j:slf4j-api": {
-            "locked": "1.7.20"
+            "locked": "1.7.21"
         }
     },
     "testRuntime": {
-        "ch.qos.logback:logback-classic": {
-            "locked": "1.1.7"
-        },
         "com.github.stefanbirkner:system-rules": {
             "locked": "1.16.0"
         },
@@ -292,7 +262,7 @@
             "locked": "1.16.10"
         },
         "org.slf4j:slf4j-api": {
-            "locked": "1.7.20"
+            "locked": "1.7.21"
         }
     }
 }
