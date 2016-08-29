@@ -1,5 +1,5 @@
 plugins {
-  id 'me.champeau.gradle.jmh' version '0.3.0'
+  id 'me.champeau.gradle.jmh' version '0.3.1'
 }
 
 dependencies {
@@ -21,10 +21,10 @@ dependencies {
   provided group: 'org.projectlombok', name: 'lombok'
 
   // jmh
-  jmh 'org.openjdk.jmh:jmh-generator-annprocess:1.12'
+  jmh 'org.openjdk.jmh:jmh-generator-annprocess:1.13'
 }
 
 jmh {
-  jmhVersion = '1.12'
+  jmhVersion = '1.13'
   includeTests = false
 }
