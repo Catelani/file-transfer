@@ -73,9 +73,13 @@ public class PrintAsciiTableCliCommandHandler extends AbstractCliCommandHandler 
 
   private void printAsciiTable(Path arquivo) {
     try (InputStream is = Files.newInputStream(arquivo)) {
-      final PropostaAcordo propostaAcordo = propostaAcordoReader.parse(is);
 
-      propostaAcordoWriter.gerarPropostaAcordo(propostaAcordo, System.out);
+      final List<PropostaAcordo> propostaAcordos = propostaAcordoReader.parseAll(is);
+
+      for (PropostaAcordo propostaAcordo : propostaAcordos) {
+        propostaAcordoWriter.gerarPropostaAcordo(propostaAcordo, System.out);
+        System.out.println("\n\n\n");
+      }
     } catch (IOException e) {
       log.debug("Erro", e);
       System.out.println(e.getMessage());

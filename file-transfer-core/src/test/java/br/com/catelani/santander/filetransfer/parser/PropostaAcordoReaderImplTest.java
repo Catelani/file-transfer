@@ -242,4 +242,41 @@ public class PropostaAcordoReaderImplTest {
     assertThat(retornoFinanceira.getNumeroAcordoRPCGerado(), is(nullValue()));
     assertThat(retornoFinanceira.getLinhaDigitavelBoletoGerado(), is(nullValue()));
   }
+
+  @Test
+  public void testLerMaisDeUmaPropostaPorArquivo() throws Exception {
+    final InputStream arquivoProposta = ClassLoader.getSystemResourceAsStream("exemplos/hf/multiploRN/ESCRN0036_2.DAT"); // 2 retornos no mesmo arquivo
+
+    final List<PropostaAcordo> propostaAcordos = propostaAcordoReader.parseAll(arquivoProposta, StandardCharsets.UTF_8);
+
+    assertThat(propostaAcordos, hasSize(3));
+
+    final PropostaAcordo propostaAcordo1 = propostaAcordos.get(0);
+    assertThat(propostaAcordo1.getCabecalho().getDadosPrestador().getNumeroLote(), is(6000001L));
+
+    // detalhes
+    assertThat(propostaAcordo1.getDetalhes(), hasSize(1));
+
+    final DetalhePropostaAcordo detalhePropostaAcordo1 = propostaAcordo1.getDetalhes().get(0);
+    final DadosContrato dadosContrato1 = detalhePropostaAcordo1.getDadosContrato();
+    assertThat(dadosContrato1.getParcelaInicial(), is(5));
+    assertThat(dadosContrato1.getParcelaFinal(), is(6));
+    assertThat(dadosContrato1.getNumeroContrato(), is("20024160223"));
+
+    final PropostaAcordo propostaAcordo2 = propostaAcordos.get(1);
+    assertThat(propostaAcordo2.getCabecalho().getDadosPrestador().getNumeroLote(), is(6000002L));
+
+    // detalhes
+    assertThat(propostaAcordo2.getDetalhes(), hasSize(1));
+
+    final DetalhePropostaAcordo detalhePropostaAcordo2 = propostaAcordo1.getDetalhes().get(0);
+    final DadosContrato dadosContrato2 = detalhePropostaAcordo2.getDadosContrato();
+    assertThat(dadosContrato2.getParcelaInicial(), is(5));
+    assertThat(dadosContrato2.getParcelaFinal(), is(6));
+    assertThat(dadosContrato2.getNumeroContrato(), is("20024160223"));
+
+    final PropostaAcordo propostaAcordo3 = propostaAcordos.get(2);
+    assertThat(propostaAcordo3.getCabecalho().getDadosPrestador().getNumeroLote(), is(34L));
+    assertThat(propostaAcordo3.getDetalhes(), hasSize(10));
+  }
 }

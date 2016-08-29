@@ -3,13 +3,13 @@ package br.com.catelani.santander.filetransfer.parser;
 import br.com.catelani.santander.filetransfer.domain.CabecalhoPropostaAcordo;
 import br.com.catelani.santander.filetransfer.domain.DetalhePropostaAcordo;
 import br.com.catelani.santander.filetransfer.domain.PropostaAcordo;
-import br.com.catelani.santander.filetransfer.util.StringUtils;
 import com.univocity.parsers.fixed.FixedWidthFields;
 import com.univocity.parsers.fixed.FixedWidthParser;
 import com.univocity.parsers.fixed.FixedWidthParserSettings;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.inject.Inject;
 import java.io.*;
@@ -18,6 +18,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import static br.com.catelani.santander.filetransfer.util.StringUtils.isNullOrEmpty;
 
 /**
  * Le os arquivos de Proposta de Acordo utilizando UnivocityParser.
@@ -39,6 +41,58 @@ class PropostaAcordoReaderImpl implements PropostaAcordoReader {
   }
 
   @Override
+  public List<PropostaAcordo> parseAll(@NotNull InputStream is) throws IOException {
+    return parseAll(is, StandardCharsets.UTF_8);
+  }
+
+  @Override
+  public List<PropostaAcordo> parseAll(@NotNull InputStream is, @Nullable Charset charset) throws IOException {
+    Objects.requireNonNull(is, "A Stream de entrada não pode ser nula!");
+
+    Charset charsetAtual = charset != null ? charset : StandardCharsets.UTF_8;
+
+    final List<PropostaAcordo> propostas = new ArrayList<>();
+
+    try (final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is, charsetAtual))) {
+      String linha;
+
+      CabecalhoPropostaAcordo cabecalhoPropostaAcordo = null;
+      List<DetalhePropostaAcordo> detalhePropostaAcordos = new ArrayList<>();
+
+      while ((linha = bufferedReader.readLine()) != null) {
+        if (isCabecalho(linha)) {
+          // se for um cabeçalho, e ja tiver um, é por que está mudando de proposta de acordo, ai finalizo a proposta e reinicializo os campos
+          if (cabecalhoPropostaAcordo != null) {
+            propostas.add(new PropostaAcordo(cabecalhoPropostaAcordo, detalhePropostaAcordos));
+
+            // nova lista para os detalhes da proxima Proposta Acordo
+            detalhePropostaAcordos = new ArrayList<>();
+          }
+
+          // leio o cabeçalho
+          cabecalhoPropostaAcordo = lerCabecalhoPropostaAcordo(linha);
+        } else {
+          // detalhes da proposta anterior
+          detalhePropostaAcordos.addAll(lerDetalhesAcordo(new StringReader(linha)));
+        }
+      }
+
+      // a ultima proposta
+      propostas.add(new PropostaAcordo(cabecalhoPropostaAcordo, detalhePropostaAcordos));
+    }
+
+    return propostas;
+  }
+
+  @Contract(value = "null -> false;", pure = true)
+  private boolean isCabecalho(@Nullable String linha) {
+    if (isNullOrEmpty(linha) || linha.length() < 396)
+      return false;
+
+    return "00001".equals(linha.substring(395));
+  }
+
+  @Override
   public PropostaAcordo parse(@NotNull InputStream is) throws IOException {
     return parse(is, null);
   }
@@ -52,7 +106,7 @@ class PropostaAcordoReaderImpl implements PropostaAcordoReader {
     try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is, charsetAtual), 1200)) {
       final String cabecalho = bufferedReader.readLine();
 
-      if (StringUtils.isNullOrEmpty(cabecalho)) {
+      if (isNullOrEmpty(cabecalho)) {
         throw new IllegalStateException("Não há nada na stream para ser lido!");
       }
 

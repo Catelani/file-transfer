@@ -1,6 +1,7 @@
 package br.com.catelani.santander.filetransfer.cli.commands;
 
 import br.com.catelani.santander.filetransfer.cli.CliCommand;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -23,6 +24,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * @author Kennedy Oliveira
  */
+@Slf4j
 public class PrintAsciiTableCliCommandHandlerTest {
 
   @Rule
@@ -93,6 +95,33 @@ public class PrintAsciiTableCliCommandHandlerTest {
 
     assertTrue(cliCommand.isHandled());
     assertThat(systemOutRule.getLog(), containsString("O arquivo [" + arquivoEntrada + "] não existe"));
+  }
 
+  @Test
+  public void testVariasPropostaAcordoPorArquivo() throws Exception {
+    tempDir.create();
+    final File arquivoTemporario = tempDir.newFile();
+
+    log.debug("Arquivo temporario => {}", arquivoTemporario.getAbsolutePath());
+
+    Files.copy(ClassLoader.getSystemResourceAsStream("exemplos/MULTIPLOS_PROPOSTA_ACORDO.DAT"), arquivoTemporario.toPath(), REPLACE_EXISTING);
+
+    final Options opcoesDisponiveis = new Options().addOption("h", "Print Ascii Table");
+    final String[] args = {"-h", arquivoTemporario.getAbsolutePath()};
+
+    CommandLineParser parser = new DefaultParser();
+    final CommandLine cli = parser.parse(opcoesDisponiveis, args);
+
+    final CliCommand cliCommand = new CliCommand(args, opcoesDisponiveis, cli);
+    commandHandler.handleCliCommand(cliCommand);
+
+    assertTrue(cliCommand.isHandled());
+    assertThat(systemOutRule.getLog(), allOf(containsString("Dados do Contrato"),
+                                             containsString("Data Vencimento"),
+                                             containsString("GCA Contrato"),
+                                             containsString("Valor Parcelas"),
+                                             containsString("GCA Dispensado"),
+                                             containsString("Tipo de Interface"),
+                                             containsString("Num. Caixa Postal")));
   }
 }
